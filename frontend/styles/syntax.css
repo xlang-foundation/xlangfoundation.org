@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400');
+
+.code_embed
+{
+    visibility:hidden;
+    height:0;
+}
+.content-box {
+    width: 500pt;
+    height: 200pt;
+    position: relative;
+}
+
+.content-box > textarea,
+.content-box > pre{
+    height: 200pt;
+    width: 500pt;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 10pt;
+    margin: 0;
+    line-height: 18pt;
+    font-size: 10pt;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 300;
+}
+
+.content-box > textarea {
+    resize: none;
+    border: none;
+    background-color: #444;
+    color: #444;
+    caret-color: #ddd;
+}
+
+.content-box > textarea:focus {
+    outline: none;
+}
+
+.content-box > pre{
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.content-box > pre> span {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.highlight-comma,
+.highlight-colon,
+.highlight-keyword {
+    font-weight: 600;
+
+}
+.highlight-operator,
+.highlight-function,
+.highlight-function-name {
+    font-weight: 400;
+}
+
+.highlight-argument {
+    font-style: italic;
+}
+
+.highlight-default,
+.highlight-colon,
+.highlight-semicolon,
+.highlight-comma {
+    color: #ddd;
+}
+
+.highlight-keyword,
+.highlight-operator {
+    color: #ff6192;
+}
+
+.highlight-function {
+    color: #47A3FF;
+}
+
+.highlight-function-name {
+    color: #61FFD3;
+}
+
+.highlight-argument {
+    color: #FFBC61
+}
+
+.highlight-string {
+    color: #9AFF76;
+}
+
+.highlight-number {
+    color: #C049FE;
+}
+
+.highlight-comment {
+    color: #777;
+}
+
+.highlight-left-parentheses,
+.highlight-right-parentheses,
+.highlight-left-bracket,
+.highlight-right-bracket {
+    color: #82C0FF;
+}

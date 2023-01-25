@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>xlang</title>
+    <link rel="stylesheet" href="styles/syntax.css">
+    <script src="scripts/xlang_grammar.js"></script>
+    <script src="scripts/code_block.js"></script>
+
+</head>
+<body>
+    <div style="width:100%;height:80%;">
+        <p class="code_embed">
+            def test(x:int,y:int)
+                z =x+y
+                print("z=",z)
+                return z
+            test(10,20)
+            x =10
+            if x>10:
+                if (x+1)>11:
+                    print(x)
+
+        </p>
+        <code-block style="width: 100%; height: 100%;">
+        </code-block>
+        <h1>another one</h1>
+        <code-block style="width: 100%; height: 100%;">
+        </code-block>
+        <h1>the thired one</h1>
+        <code-block style="width: 100%; height: 100%;">
+        </code-block>
+    </div>
+</body>
+</html>

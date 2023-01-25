@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>xlang menu</title>
+    </head>
+    <body>
+        <script>
+            function onTest()
+            {
+
+            }
+          
+        </script>
+    <div style="padding-top: 10px;display: flex"> 
+        <style>
+            .MenuItem
+            {
+                font-size:large;
+                padding-top: 10px;
+                padding-bottom:10px;
+                padding-left: 10px;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+            .MenuItem:hover 
+            {
+                background-color:dodgerblue;
+                color: white;
+                font-weight: 800;
+                cursor: pointer;
+            }
+            .active 
+            {
+                color: red;
+            }
+            .MenuItem.active:hover 
+            {
+                background-color:dodgerblue;
+                color: red;
+                font-weight: 800;
+                cursor: pointer;
+            }
+        </style>
+        <div style="flex: 0 0 auto;padding-top:0px;padding-left:5px;">
+            <img src="images/xlang_icon.jpg"/>
+        </div>
+        <div style="flex:1 1 auto;padding-left: 5px;display: flex;flex-wrap: nowrap;margin-bottom: 3px;">
+            <a class="MenuItem"
+               onclick="$('a',this.parentNode).removeClass('active');$(this).addClass('active');$('#idMain').set('src','xlang.html');">xlang</a>
+            <a class="MenuItem"
+               onclick="$('a',this.parentNode).removeClass('active');$(this).addClass('active');$('#idMain').set('src','getstarted.html');">Get Started</a>
+            <a class="MenuItem"
+               onclick="$('a',this.parentNode).removeClass('active');$(this).addClass('active');$('#idMain').set('src','tutorial.html');">Tutorial</a>
+            <a class="MenuItem"
+               onclick="$('a',this.parentNode).removeClass('active');$(this).addClass('active');$('#idMain').set('src','community.html');">Community</a>
+            <a class="MenuItem"
+               onclick="$('a',this.parentNode).removeClass('active');$(this).addClass('active');$('#idMain').set('src','downloads.html');">Downloads</a>
+            <a class="MenuItem"
+               onclick="$('a',this.parentNode).removeClass('active');$(this).addClass('active');$('#idMain').set('src','documentation.html');">Documentation</a>
+            <a class="MenuItem"
+               onclick="$('a',this.parentNode).removeClass('active');$(this).addClass('active');$('#idMain').set('src','Foundation.html');">The Foundation</a>
+        </div>
+        <div style="flex: 0 0 1px;"></div>
+    </div>
+</body>
+</html>
