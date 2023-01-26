@@ -83,7 +83,7 @@ class CodeBlockImpl extends HTMLElement
         var pre_o = document.createElement("pre");
         div_container.appendChild(textarea_o);
         div_container.appendChild(pre_o);
-        div_container.className += " content-box";
+        div_container.className += "content-box";
 
         this.code_input_element = textarea_o;
         this.grammar_element = pre_o;

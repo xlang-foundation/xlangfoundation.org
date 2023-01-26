@@ -15,6 +15,8 @@ srv.get(".*",(req,res){
 	print("ext=${ext}")
 	if ext == "js":
 	  mime = "text/javascript"
+	elif ext == "css":
+	  mime = "text/css"
 	elif ext == "jpg":
 	  mime = "image/jpeg"
 	  openMode ="rb"

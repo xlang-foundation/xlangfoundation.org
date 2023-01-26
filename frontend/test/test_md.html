@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Xlang with MD</title>
+    <link rel="stylesheet" href="../styles/syntax.css">
+    <script src="../scripts/xlang_grammar.js"></script>
+    <script src="../scripts/code_block.js"></script>
+    <script src="../scripts/cantorJs.js"></script>
+</head>
+<body>
+    <div id="content"></div>
+    <script type="module">
+        import { marked } from '../lib/markedjs/src/marked.js';
+        function contentCallback(content) {
+            document.getElementById('content').innerHTML =
+                marked.parse(content);
+        }
+        let full_url = "http://localhost:8088/test/test.md";
+        new CantorRequest(full_url, contentCallback);
+
+    </script>
+</body>
+</html>
