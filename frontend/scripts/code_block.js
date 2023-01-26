@@ -77,12 +77,20 @@ class CodeBlockImpl extends HTMLElement
         this.innerText = "";
         var div_container = document.createElement("div");
         this.appendChild(div_container);
+        //create textarea for code editing
         var textarea_o = document.createElement("textarea");
         textarea_o.wrap = "soft";
         textarea_o.spellcheck = false;
-        var pre_o = document.createElement("pre");
         div_container.appendChild(textarea_o);
+        //pre for code syntax show
+        var pre_o = document.createElement("pre");
         div_container.appendChild(pre_o);
+        //div for output
+        var div_output = document.createElement("div");
+        div_output.className += "output";
+        div_output.innerHTML = "<h1>output</h1>";
+        div_container.appendChild(div_output);
+
         div_container.className += "content-box";
 
         this.code_input_element = textarea_o;

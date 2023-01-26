@@ -6,24 +6,30 @@
     height:0;
 }
 .content-box {
-    width: 500pt;
-    height: 200pt;
+    width: 100%;
+    height: 400pt;
     position: relative;
 }
+    .content-box > .output {
+        width: 100%;
+        height: 200pt;
+        position: relative;
+        background-color: gray;
+    }
 
-.content-box > textarea,
-.content-box > pre{
-    height: 200pt;
-    width: 500pt;
-    box-sizing: border-box;
-    overflow: auto;
-    padding: 10pt;
-    margin: 0;
-    line-height: 18pt;
-    font-size: 10pt;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 300;
-}
+    .content-box > textarea,
+    .content-box > pre {
+        width: 100%;
+        height: 200pt;
+        box-sizing: border-box;
+        overflow: auto;
+        padding: 10pt;
+        margin: 0;
+        line-height: 18pt;
+        font-size: 10pt;
+        font-family: 'Roboto Mono', monospace;
+        font-weight: 300;
+    }
 
 .content-box > textarea {
     resize: none;
