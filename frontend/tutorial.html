@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <script>
+        function go_to(url) {
+            $('#idContent').set('src', url);
+        }
+    </script>
+    <script type="module" src="scripts/md_block.js"></script>
+</head>
 <body>
-    <iframe width="100%" height="100%"
-            src="http://localhost:8888/doc/workspaces/auto-Y/tree/Tutorial/Untitled4.ipynb?kernel=xlang&toolbar=0&sidebar=0" title="xlang Tutorial"></iframe>
+    <div style="width:100%;height:100%;padding-left:10px;display: flex;flex-direction: row;">
+        <md-block style="width: 200px; height: 100%; padding-left: 10px;" src="/tutorials/outline.md">
+  
+        </md-block>
+        <md-block id="idContent" style="width: 100%; padding-left: 20px; border-left: groove; overflow: scroll;" src="/tutorials/overview.md">
+
+        </md-block>
+
+    </div>
+
 </body>
 </html>
