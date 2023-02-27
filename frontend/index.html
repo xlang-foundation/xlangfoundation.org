@@ -18,7 +18,11 @@
     <link rel="stylesheet" href="./styles/syntax.css">
     <script src="scripts/xlang_grammar.js"></script>
     <script src="scripts/code_block.js"></script>
-
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            $('#idMain').set('src', 'xlang.html');
+        });
+    </script>
 </head>
     <body>
     <div style="height:100%;display: flex;flex-direction: column;">
