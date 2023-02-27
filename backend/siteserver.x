@@ -1,6 +1,6 @@
 from xlang_http import http
 from xlang_os import fs
-port = 8088
+port = 9088
 srv = http.Server()
 root = "../frontend"
 print("root=${root}")
