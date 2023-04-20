@@ -5,7 +5,7 @@
 
 ```xlang
 
-def func(info:string):
+def func_test(info:string):
 	print(info)
-func("Hello Xlang")
+func_test("Hello Xlang")
 ```

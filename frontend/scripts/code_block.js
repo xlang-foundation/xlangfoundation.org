@@ -93,6 +93,30 @@ class CodeBlockImpl extends HTMLElement
 
         div_container.className += "content-box";
 
+        function fetchOutputs() {
+            siteApi = new SiteApi();
+            function callback(obj) {
+                alert("ret:" + obj.ret);
+            }
+            siteApi.call("/api/fetchOutputs?dummy=10", callback);
+        }
+        function runCode() {
+            siteApi = new SiteApi();
+            function callback(obj) {
+                alert("ret:"+obj.ret);
+            }
+            code = encodeURIComponent(textarea_o.value);
+            siteApi.call("/api/runCode?code='" + code + "'", callback);
+            fetchOutputs();
+        }
+
+        //add float buttons
+        var a_o = document.createElement("a");
+        a_o.onclick = runCode;
+        a_o.className = "float_button";
+        a_o.innerHTML = "<i style='margin-top:40px;'>run</i>"
+        div_container.appendChild(a_o);
+
         this.code_input_element = textarea_o;
         this.grammar_element = pre_o;
 

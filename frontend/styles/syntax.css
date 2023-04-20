@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400');
 
+.float_button {
+    position:absolute;
+    width: 60px;
+    height: 60px;
+    top: 10px;
+    right: 10px;
+    background-color: #0C9;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
 .code_embed
 {
     visibility:hidden;

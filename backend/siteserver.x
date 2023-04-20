@@ -1,10 +1,41 @@
 from xlang_http import http
 from xlang_os import fs
+from xlang_os import utils
+import xlangkernel
+
 port = 9088
 srv = http.Server()
 root = "../frontend"
-print("root=${root}")
+print("root=${root},pid=",pid())
 
+kmgt = xlangkernel.KernelManager()
+
+@srv.route("/api/newSession")
+def newSession():
+	sessionId = utils.generate_uid()
+	code = "print('new session')"
+	kmgt.runCode(sessionId,code)
+	idPack = {"sessionId":sessionId}
+	return [str(idPack,format=True), "text/json"]
+
+@srv.route("/api/runCode")
+def runCode():
+	print("inside runCode")
+	params = req.params
+	sessionId = params["sessionId"]
+	code = params["code"]
+	code = code.slice(1,code.size()-1)
+	kmgt.runCode(sessionId,code)
+	return [{"ret":True}, "text/json"]
+
+@srv.route("/api/fetchOutputs")
+def fetchOutputs():
+	print("inside fetchOutputs")
+	params = req.params
+	sessionId = params["sessionId"]
+	retVal = kmgt.fetchOutputs(sessionId)
+	print("fetchOutputs,ret",retVal)
+	return [{"ret":retVal}, "text/json"]
 
 def retreiveContent(filePath,openMode):
   f = fs.File(filePath,openMode)

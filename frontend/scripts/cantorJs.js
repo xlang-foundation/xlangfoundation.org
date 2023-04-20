@@ -156,6 +156,10 @@ class CantorRequest
                 self._cb(self._cachedObj._content);
             }
         }
+        function reqTimeout(e)
+        {
+
+        }
         var dict = window["CantorRequest_cache"];
         if( dict == null)
         {
@@ -169,6 +173,7 @@ class CantorRequest
             dict[url] = this._cachedObj;
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
+            oReq.addEventListener("timeout ", reqTimeout);
             oReq.open("GET", url);
             oReq.send();
         }

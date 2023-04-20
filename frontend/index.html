@@ -15,11 +15,21 @@
         }
     </style>
     <script src="scripts/cantorJs.js"></script>
+    <script src="scripts/api.js"></script>
     <link rel="stylesheet" href="./styles/syntax.css">
     <script src="scripts/xlang_grammar.js"></script>
     <script src="scripts/code_block.js"></script>
     <script>
+        _sessionId = "this is a sesion ID";
+        function get_session() {
+            siteApi = new SiteApi();
+            function callback(obj) {
+                _sessionId = obj.sessionId;
+            }
+            siteApi.call("/api/newSession", callback);
+        }
         window.addEventListener('DOMContentLoaded', (event) => {
+            get_session();
             $('#idMain').set('src', 'xlang.html');
         });
     </script>
