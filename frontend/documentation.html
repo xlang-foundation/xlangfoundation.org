@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <script>
+        function go_to(url) {
+            $('#idContent').set('src', url);
+        }
+    </script>
+    <script type="module" src="scripts/md_block.js"></script>
+</head>
 <body>
-    <div style="padding-left:10em;padding-right:10em;">
-        <h1>Under construction,Coming soon...</h1>
-        <p>xlang Grammar</p>
-        <p>runtime APIs</p>
+    <div style="width:100%;height:100%;padding-left:10px;display: flex;flex-direction: row;">
+
+        <md-block id="idContent" style="width: 100%; padding-left: 20px; border-left: groove; overflow: scroll;" src="/Doc/introduce.md">
+
+        </md-block>
+
     </div>
+
 
 </body>
 </html>
