@@ -13,7 +13,6 @@ class SiteApi {
         }
         let param = "&sessionId=" + _sessionId;
         let uri = this.baseurl + api + param;
-        alert("uri="+uri);
         new CantorRequest(uri, contentCallback);
     }
 }
