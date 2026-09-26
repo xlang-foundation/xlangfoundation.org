@@ -85,9 +85,9 @@ const progress = [
   ],
   [
     "03",
-    "LLVM compilation",
+    "LLVM compiled executor",
     "Next verification milestone",
-    "An optional LLVM JIT/AOT path is planned from IR. Correctness, performance, and deployment claims await verification.",
+    "An optional LLVM JIT/AOT executor is planned over IR. Correctness, performance, and deployment claims await verification.",
     `${repo}/blob/main/doc/executor-spec.md`,
   ],
   [
@@ -99,10 +99,10 @@ const progress = [
   ],
   [
     "05",
-    "Managed I/O for agents",
+    "Managed I/O sandbox",
     "Design direction",
-    "A proposed runtime boundary for permissions, tracing, cancellation, and replay across files, network, devices, and tools.",
-    `${repo}/blob/main/doc/rpc-device-spec.md`,
+    "A proposed capability boundary for all outside access: files, network, devices, processes, and tools, with a durable journal, replay, and transaction support.",
+    "https://github.com/xlang-foundation/xlangfoundation.org/blob/main/docs/managed-io-sandbox.md",
   ],
 ];
 </script>
@@ -236,11 +236,11 @@ const progress = [
       </article>
       <article>
         <div class="pillar-index">03 <span>↗</span></div>
-        <h3>AI-aware I/O</h3>
+        <h3>Managed outside access</h3>
         <p>
-          Our design direction is managed I/O: explicit capabilities and
-          observable effects for agent workflows across files, network, and
-          devices.
+          The proposed I/O sandbox mediates every outside effect: files,
+          network, devices, processes, and tools. Capability checks, a durable
+          record, replay, and transactions are the design goals.
         </p>
         <span class="pill">DESIGN DIRECTION</span>
       </article>
@@ -272,8 +272,9 @@ const progress = [
               language.
             </li>
             <li>
-              <b>Managed effects.</b> Develop capability-aware, observable I/O
-              for agents and devices as a future runtime layer.
+              <b>Managed effects.</b> Route every outside access through a
+              capability-aware boundary with durable records as a future runtime
+              layer.
             </li>
           </ul>
           <a
@@ -294,9 +295,10 @@ const progress = [
             <h2>Interpret now.<br /><span>Compile when ready.</span></h2>
           </div>
           <p>
-            Python source lowers to ProgramIR. The working IR interpreter runs
-            it today; an optional LLVM compiler is the next verification
-            milestone. Both paths are designed to use the same XLang3 runtime.
+            Python source lowers to ProgramIR. Executors consume IR: the
+            interpreter executor runs it today, while an optional LLVM compiled
+            executor is the next verification milestone. Both use the XLang3
+            runtime.
           </p>
         </div>
         <ArchitectureDiagram />
@@ -304,7 +306,7 @@ const progress = [
         <div class="architecture-benefits">
           <div>
             <span>01 / NO COMPILER REQUIRED</span>
-            <h3>IR runs directly.</h3>
+            <h3>Interpreter executor.</h3>
             <p>
               The interpreter already has scalar, local-slot, call, and cache
               fast paths. It works without LLVM; current measured
@@ -316,11 +318,11 @@ const progress = [
           </div>
           <div>
             <span>02 / OPTIONAL COMPILATION</span>
-            <h3>LLVM is another path.</h3>
+            <h3>Compiled executor.</h3>
             <p>
-              JIT and ahead-of-time compilation are planned as optional IR
-              backends. The compiler path will be added to measured comparisons
-              after it passes correctness verification.
+              JIT and ahead-of-time compilation are planned as optional
+              executors over IR. We will measure the compiled path after it
+              passes correctness verification.
             </p>
             <a
               class="text-link light-link"
@@ -343,6 +345,40 @@ const progress = [
               target="_blank"
               rel="noopener"
               >Read the runtime ABI ↗</a
+            >
+          </div>
+        </div>
+        <div class="managed-io-panel">
+          <div>
+            <span>PROPOSED / MANAGED I/O SANDBOX</span>
+            <h3>Every effect crosses a boundary.</h3>
+            <p>
+              File access, network calls, devices, subprocesses, and external
+              tools would require scoped capabilities. The sandbox would record
+              each requested effect and result durably, enabling review and
+              replay without silently repeating an outside action.
+            </p>
+          </div>
+          <div>
+            <ol>
+              <li>
+                <b>Authorize</b> the operation against an explicit capability.
+              </li>
+              <li>
+                <b>Record</b> intent, outcome, and checkpoints in a durable
+                journal.
+              </li>
+              <li>
+                <b>Commit or replay</b> supported local transactions; use
+                idempotency or compensation for external services.
+              </li>
+            </ol>
+            <a
+              class="text-link light-link"
+              href="https://github.com/xlang-foundation/xlangfoundation.org/blob/main/docs/managed-io-sandbox.md"
+              target="_blank"
+              rel="noopener"
+              >Read the managed I/O proposal ↗</a
             >
           </div>
         </div>

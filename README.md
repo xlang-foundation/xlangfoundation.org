@@ -38,9 +38,10 @@ These are narrow microbenchmarks, measured as wall time including startup. They 
 ## Editorial rules
 
 - Describe Python 3.14 compatibility as a target, not a completed claim.
-- Distinguish the working IR interpreter and embeddable runtime from the planned LLVM JIT/AOT path. Update the SVG and status text only after LLVM verification lands.
+- Show the executor boundary between ProgramIR and execution. Distinguish the working interpreter executor and embeddable runtime from the planned LLVM JIT/AOT executor. Update its status only after LLVM verification lands.
 - Describe interpreter fast paths as implemented, but use measured results for comparative speed claims.
 - Describe managed I/O as a design direction until capability control, tracing, and replay have implementation evidence.
+- Treat the [managed I/O sandbox proposal](docs/managed-io-sandbox.md) as covering all outside access, including files, network, devices, processes, and tools. Do not imply the current playground already enforces it.
 - Update benchmark data and method together; never type performance numbers into the page by hand.
 
 The website code is MIT licensed as in [`LICENSE`](LICENSE). XLang3 itself is Apache 2.0 licensed.

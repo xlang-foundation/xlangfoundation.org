@@ -460,6 +460,46 @@ p {
   font-size: 13px;
   min-height: 106px;
 }
+.managed-io-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8%;
+  margin-top: 55px;
+  padding: 31px 35px;
+  border: 1px solid #597380;
+  background: #233c4e;
+}
+.managed-io-panel span {
+  color: #b9e58e;
+  font:
+    10px "DM Mono",
+    monospace;
+  letter-spacing: 0.08em;
+}
+.managed-io-panel h3 {
+  margin: 16px 0 10px;
+  font-size: 28px;
+  letter-spacing: -0.04em;
+}
+.managed-io-panel p,
+.managed-io-panel li {
+  color: #b9c5ca;
+  font-size: 13px;
+}
+.managed-io-panel p {
+  margin: 0;
+}
+.managed-io-panel ol {
+  margin: 0;
+  padding-left: 20px;
+}
+.managed-io-panel li {
+  padding: 5px 0;
+  line-height: 1.55;
+}
+.managed-io-panel li b {
+  color: #edf4e9;
+}
 .playground-section,
 .benchmark-section,
 .progress-section,
@@ -990,6 +1030,7 @@ footer {
   .pillars,
   .architecture-intro,
   .architecture-benefits,
+  .managed-io-panel,
   .history-section,
   .agent-grid,
   .join {
@@ -1020,6 +1061,10 @@ footer {
   }
   .architecture-benefits p {
     min-height: 0;
+  }
+  .managed-io-panel {
+    gap: 25px;
+    padding: 25px 20px;
   }
   .section-heading {
     display: block;

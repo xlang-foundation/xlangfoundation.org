@@ -5,7 +5,7 @@
     aria-label="Scrollable XLang3 architecture diagram"
   >
     <svg
-      viewBox="0 0 940 560"
+      viewBox="0 0 940 730"
       role="img"
       aria-labelledby="architecture-title architecture-description"
       xmlns="http://www.w3.org/2000/svg"
@@ -15,10 +15,12 @@
       </title>
       <desc id="architecture-description">
         Python source passes through parsing and semantic binding to ProgramIR.
-        ProgramIR runs through the available IR interpreter or a planned
-        optional LLVM compiler. Both paths use the XLang3 runtime, which can run
-        as a standalone command-line program or be embedded in another
-        application.
+        ProgramIR crosses an executor interface. The available interpreter
+        executor runs IR directly. A planned optional LLVM JIT or AOT executor
+        will compile IR. Both executors use the XLang3 runtime, which can run as
+        a standalone command-line program or be embedded in another application.
+        A proposed managed I/O sandbox would mediate effects with capability
+        checks, a durable journal, replay, and transaction support.
       </desc>
       <defs>
         <pattern
@@ -66,8 +68,8 @@
         </marker>
       </defs>
 
-      <rect width="940" height="560" fill="#1d3246" />
-      <rect width="940" height="560" fill="url(#arch-grid)" />
+      <rect width="940" height="730" fill="#1d3246" />
+      <rect width="940" height="730" fill="url(#arch-grid)" />
       <text x="28" y="34" class="arch-meta">
         XLANG3 / EXECUTION ARCHITECTURE
       </text>
@@ -114,74 +116,106 @@
 
       <path
         class="arch-line"
-        d="M 795 140 V 177 H 246 V 204"
+        d="M 795 140 V 192 H 603"
+        marker-end="url(#arch-arrow)"
+      />
+      <g class="arch-interface">
+        <rect x="337" y="165" width="262" height="54" rx="3" />
+        <text x="357" y="188" class="arch-label">EXECUTOR INTERFACE</text>
+        <text x="357" y="207" class="arch-detail">consumes ProgramIR</text>
+      </g>
+      <path
+        class="arch-line"
+        d="M 468 219 V 240 H 246 V 257"
         marker-end="url(#arch-arrow)"
       />
       <path
         class="arch-line arch-line-muted"
-        d="M 795 140 V 204"
+        d="M 468 219 V 240 H 695 V 257"
         marker-end="url(#arch-arrow-muted)"
       />
 
       <g class="arch-executor arch-active">
-        <rect x="28" y="207" width="435" height="132" rx="3" />
+        <rect x="28" y="260" width="435" height="132" rx="3" />
         <rect
           x="45"
-          y="225"
+          y="278"
           width="112"
           height="22"
           rx="11"
           class="arch-tag-bg"
         />
-        <text x="101" y="240" class="arch-tag" text-anchor="middle">
+        <text x="101" y="293" class="arch-tag" text-anchor="middle">
           AVAILABLE NOW
         </text>
-        <text x="48" y="281" class="arch-heading">IR interpreter</text>
-        <text x="48" y="313" class="arch-detail">
+        <text x="48" y="334" class="arch-heading">Interpreter executor</text>
+        <text x="48" y="366" class="arch-detail">
           Scalar, local-slot, call, and cache fast paths
         </text>
       </g>
       <g class="arch-executor arch-upcoming">
-        <rect x="478" y="207" width="434" height="132" rx="3" />
+        <rect x="478" y="260" width="434" height="132" rx="3" />
         <rect
           x="495"
-          y="225"
+          y="278"
           width="165"
           height="22"
           rx="11"
           class="arch-tag-bg"
         />
-        <text x="577" y="240" class="arch-tag" text-anchor="middle">
+        <text x="577" y="293" class="arch-tag" text-anchor="middle">
           NEXT TO VERIFY
         </text>
-        <text x="498" y="281" class="arch-heading">LLVM compilation</text>
-        <text x="498" y="313" class="arch-detail">
-          Optional JIT / AOT backend; results pending
+        <text x="498" y="334" class="arch-heading">LLVM executor</text>
+        <text x="498" y="366" class="arch-detail">
+          Optional JIT / AOT compilation; results pending
         </text>
       </g>
 
       <path
         class="arch-line"
-        d="M 246 339 V 374 H 469 V 390"
+        d="M 246 392 V 427 H 469 V 441"
         marker-end="url(#arch-arrow)"
       />
-      <path class="arch-line arch-line-muted" d="M 695 339 V 374 H 471" />
+      <path class="arch-line arch-line-muted" d="M 695 392 V 427 H 471" />
       <g class="arch-runtime">
-        <rect x="260" y="394" width="420" height="73" rx="3" />
-        <text x="280" y="425" class="arch-label">XLANG3 RUNTIME</text>
-        <text x="280" y="451" class="arch-detail">
+        <rect x="260" y="445" width="420" height="73" rx="3" />
+        <text x="280" y="476" class="arch-label">XLANG3 RUNTIME</text>
+        <text x="280" y="502" class="arch-detail">
           X::Value objects + compiler-neutral C ABI
         </text>
       </g>
       <path
         class="arch-line"
-        d="M 470 467 V 497"
+        d="M 470 518 V 541 H 246 V 552"
         marker-end="url(#arch-arrow)"
       />
-      <text x="470" y="535" class="arch-deploy" text-anchor="middle">
-        STANDALONE CLI
-        <tspan fill="#79a7a1">/</tspan>
-        EMBEDDED LIBRARY
+      <path
+        class="arch-line arch-line-muted"
+        d="M 470 518 V 541 H 695 V 552"
+        marker-end="url(#arch-arrow-muted)"
+      />
+      <g class="arch-deployment">
+        <rect x="28" y="556" width="435" height="126" rx="3" />
+        <text x="48" y="581" class="arch-meta">AVAILABLE DEPLOYMENT</text>
+        <text x="48" y="620" class="arch-heading">Standalone or embedded</text>
+        <text x="48" y="650" class="arch-detail">
+          CLI · shared library · static library
+        </text>
+      </g>
+      <g class="arch-io">
+        <rect x="478" y="556" width="434" height="126" rx="3" />
+        <text x="498" y="581" class="arch-meta">DESIGN DIRECTION</text>
+        <text x="498" y="620" class="arch-heading">Managed I/O sandbox</text>
+        <text x="498" y="646" class="arch-detail">
+          Files · network · devices · processes · tools
+        </text>
+        <text x="498" y="665" class="arch-detail arch-detail-small">
+          Capabilities · durable log · replay · transactions
+        </text>
+      </g>
+      <text x="470" y="710" class="arch-footer" text-anchor="middle">
+        EXECUTORS RUN IR; EFFECTS CROSS A MANAGED BOUNDARY
       </text>
     </svg>
   </div>
@@ -204,7 +238,8 @@ svg {
 .arch-label,
 .arch-detail,
 .arch-tag,
-.arch-deploy {
+.arch-deploy,
+.arch-footer {
   font-family: "DM Mono", monospace;
 }
 .arch-meta {
@@ -229,6 +264,7 @@ svg {
   stroke: #63867c;
 }
 .arch-ir rect,
+.arch-interface rect,
 .arch-runtime rect {
   fill: #335344;
   stroke: #bce993;
@@ -241,6 +277,9 @@ svg {
 .arch-detail {
   fill: #b8c9c6;
   font-size: 11px;
+}
+.arch-detail-small {
+  font-size: 10px;
 }
 .arch-executor > rect:first-child {
   fill: #233c4e;
@@ -273,11 +312,25 @@ svg {
   fill: #31543f;
   stroke: #bce993;
 }
-.arch-deploy {
+.arch-deploy,
+.arch-footer {
   fill: #d4e9d0;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
+}
+.arch-deployment rect {
+  fill: #233c4e;
+  stroke: #8cb87d;
+}
+.arch-io rect {
+  fill: #233c4e;
+  stroke: #718b9a;
+  stroke-dasharray: 6 4;
+}
+.arch-footer {
+  font-size: 10px;
+  fill: #a9b7b9;
 }
 @media (max-width: 800px) {
   svg {
