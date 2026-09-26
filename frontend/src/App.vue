@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import benchmark from "../data/benchmark.json";
+import ArchitectureDiagram from "./ArchitectureDiagram.vue";
 
 const repo = "https://github.com/CantorAI/xlang3";
 const oldRepo = "https://github.com/xlang-foundation/xlang";
@@ -79,18 +80,25 @@ const progress = [
     "02",
     "XLang3 runtime",
     "Foundation implemented",
-    "Direct scalar values, reference-counted objects, semantic binding, ProgramIR, and a direct interpreter form the current core.",
-    `${repo}/blob/main/doc/xlang3-implementation-spec.md`,
+    "ProgramIR and its interpreter run on the XLang3 value runtime. Shared and static runtime libraries support embedding; the CLI supports standalone use.",
+    `${repo}/blob/main/doc/runtime-c-abi-spec.md`,
   ],
   [
     "03",
+    "LLVM compilation",
+    "Next verification milestone",
+    "An optional LLVM JIT/AOT path is planned from IR. Correctness, performance, and deployment claims await verification.",
+    `${repo}/blob/main/doc/executor-spec.md`,
+  ],
+  [
+    "04",
     "FastAPI on XLang3",
     "Active validation",
     "FastAPI and its dependencies run on the XLang3 VM in integration tests. Full upstream compatibility remains open.",
     `${repo}/blob/main/agent/python314_compat/tasks/fastapi.md`,
   ],
   [
-    "04",
+    "05",
     "Managed I/O for agents",
     "Design direction",
     "A proposed runtime boundary for permissions, tracing, cancellation, and replay across files, network, devices, and tools.",
@@ -279,45 +287,63 @@ const progress = [
       </div>
     </section>
     <section class="architecture" id="architecture">
-      <div class="wrap architecture-grid">
-        <div>
-          <div class="section-kicker light">02 / UNDER THE HOOD</div>
-          <h2>One language.<br /><span>Clear boundaries.</span></h2>
+      <div class="wrap">
+        <div class="architecture-intro">
+          <div>
+            <div class="section-kicker light">02 / UNDER THE HOOD</div>
+            <h2>Interpret now.<br /><span>Compile when ready.</span></h2>
+          </div>
           <p>
-            The direct interpreter is the working path. Optimized execution,
-            GraphIR, JIT, and AOT are staged goals, with LLVM optional rather
-            than a runtime requirement.
+            Python source lowers to ProgramIR. The working IR interpreter runs
+            it today; an optional LLVM compiler is the next verification
+            milestone. Both paths are designed to use the same XLang3 runtime.
           </p>
-          <a
-            class="text-link light-link"
-            :href="`${repo}/blob/main/doc/roadmap-phase0-phase3.md`"
-            target="_blank"
-            rel="noopener"
-            >Read the technical roadmap ↗</a
-          >
         </div>
-        <div class="pipeline">
-          <div class="pipeline-top">
-            EXECUTION PIPELINE <span>XL3 / 2026</span>
+        <ArchitectureDiagram />
+        <p class="diagram-hint">Scroll horizontally to explore the diagram.</p>
+        <div class="architecture-benefits">
+          <div>
+            <span>01 / NO COMPILER REQUIRED</span>
+            <h3>IR runs directly.</h3>
+            <p>
+              The interpreter already has scalar, local-slot, call, and cache
+              fast paths. It works without LLVM; current measured
+              microbenchmarks remain slower than CPython.
+            </p>
+            <a class="text-link light-link" href="#benchmarks"
+              >See the measured results ↗</a
+            >
           </div>
-          <div
-            v-for="(step, i) in [
-              ['Python source', 'ordinary .py files'],
-              ['Parser + AST', 'syntax structure'],
-              ['Semantic binding', 'scopes and slots'],
-              ['ProgramIR', 'executable meaning'],
-              ['XLang3 runtime', 'values, objects, executor'],
-            ]"
-            :key="i"
-            class="pipeline-step"
-            :class="{ highlighted: i === 4 }"
-          >
-            <span>0{{ i + 1 }}</span
-            ><b>{{ step[0] }}</b
-            ><small>{{ step[1] }}</small>
+          <div>
+            <span>02 / OPTIONAL COMPILATION</span>
+            <h3>LLVM is another path.</h3>
+            <p>
+              JIT and ahead-of-time compilation are planned as optional IR
+              backends. The compiler path will be added to measured comparisons
+              after it passes correctness verification.
+            </p>
+            <a
+              class="text-link light-link"
+              :href="`${repo}/blob/main/doc/executor-spec.md`"
+              target="_blank"
+              rel="noopener"
+              >Read the executor design ↗</a
+            >
           </div>
-          <div class="pipeline-end">
-            GRAPH IR + JIT / AOT <span>FUTURE, OPTIONAL</span>
+          <div>
+            <span>03 / TWO WAYS TO DEPLOY</span>
+            <h3>Embed or run standalone.</h3>
+            <p>
+              Use the XLang3 command-line executable, or integrate the runtime
+              through its shared or static library and compiler-neutral C ABI.
+            </p>
+            <a
+              class="text-link light-link"
+              :href="`${repo}/blob/main/doc/runtime-c-abi-spec.md`"
+              target="_blank"
+              rel="noopener"
+              >Read the runtime ABI ↗</a
+            >
           </div>
         </div>
       </div>

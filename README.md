@@ -38,7 +38,8 @@ These are narrow microbenchmarks, measured as wall time including startup. They 
 ## Editorial rules
 
 - Describe Python 3.14 compatibility as a target, not a completed claim.
-- Distinguish implemented runtime capabilities from planned GraphIR/JIT/AOT work.
+- Distinguish the working IR interpreter and embeddable runtime from the planned LLVM JIT/AOT path. Update the SVG and status text only after LLVM verification lands.
+- Describe interpreter fast paths as implemented, but use measured results for comparative speed claims.
 - Describe managed I/O as a design direction until capability control, tracing, and replay have implementation evidence.
 - Update benchmark data and method together; never type performance numbers into the page by hand.
 

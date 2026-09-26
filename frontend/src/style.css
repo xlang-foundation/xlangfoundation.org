@@ -399,72 +399,66 @@ p {
   color: #f5f7f0;
   padding: 104px 0 112px;
 }
-.architecture-grid {
+.architecture-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 11%;
+  gap: 9%;
+  align-items: end;
+  margin-bottom: 35px;
 }
 .section-kicker.light {
   color: #b8dc91;
 }
 .architecture h2 {
-  margin: 31px 0 23px;
+  margin: 31px 0 0;
 }
 .architecture h2 span {
   color: #a9e28a;
 }
-.architecture p {
+.architecture-intro p {
   max-width: 490px;
   color: #b9c5ca;
   font-size: 16px;
+  margin-bottom: 4px;
 }
 .light-link {
   color: #c5e9a2;
   margin-top: 17px;
 }
-.pipeline {
-  border: 1px solid #496075;
-  background: #22354a;
-  padding: 23px 27px;
-  box-shadow: 18px 18px 0 #112035;
-}
-.pipeline-top,
-.pipeline-end {
-  display: flex;
-  justify-content: space-between;
-  font: 10px "DM Mono";
-  letter-spacing: 0.08em;
+.diagram-hint {
+  display: none;
   color: #a9b7b9;
-  padding-bottom: 18px;
+  font:
+    10px "DM Mono",
+    monospace;
+  margin: 16px 0 0;
 }
-.pipeline-step {
+.architecture-benefits {
   display: grid;
-  grid-template-columns: 42px 1fr auto;
-  align-items: center;
-  border-top: 1px solid #4a6070;
-  padding: 16px 0;
-  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 29px;
+  margin-top: 54px;
 }
-.pipeline-step > span {
-  font: 11px "DM Mono";
-  color: #9db3a7;
+.architecture-benefits > div {
+  border-top: 1px solid #536c70;
+  padding-top: 18px;
 }
-.pipeline-step b {
-  font-size: 15px;
+.architecture-benefits span {
+  color: #b9e58e;
+  font:
+    10px "DM Mono",
+    monospace;
+  letter-spacing: 0.08em;
 }
-.pipeline-step small {
-  color: #adbec1;
-  font: 10px "DM Mono";
+.architecture-benefits h3 {
+  font-size: 23px;
+  letter-spacing: -0.04em;
+  margin: 18px 0 9px;
 }
-.pipeline-step.highlighted {
-  color: #c5ef93;
-}
-.pipeline-end {
-  border-top: 1px solid #4a6070;
-  padding: 18px 0 0;
-}
-.pipeline-end span {
-  color: #c5ef93;
+.architecture-benefits p {
+  color: #b9c5ca;
+  font-size: 13px;
+  min-height: 106px;
 }
 .playground-section,
 .benchmark-section,
@@ -904,14 +898,19 @@ footer {
   .statement-grid {
     grid-template-columns: 1fr;
   }
-  .architecture-grid {
-    gap: 6%;
+  .architecture-intro {
+    gap: 5%;
   }
-  .pipeline-step {
-    grid-template-columns: 32px 1fr;
+  .architecture-benefits {
+    gap: 18px;
   }
-  .pipeline-step small {
-    display: none;
+  .architecture-benefits p {
+    min-height: 130px;
+  }
+}
+@media (max-width: 800px) {
+  .diagram-hint {
+    display: block;
   }
 }
 @media (max-width: 700px) {
@@ -989,7 +988,8 @@ footer {
     padding-bottom: 75px;
   }
   .pillars,
-  .architecture-grid,
+  .architecture-intro,
+  .architecture-benefits,
   .history-section,
   .agent-grid,
   .join {
@@ -1012,8 +1012,14 @@ footer {
   .pillars p {
     min-height: 0;
   }
-  .architecture-grid {
-    gap: 40px;
+  .architecture-intro {
+    gap: 20px;
+  }
+  .architecture-benefits {
+    gap: 20px;
+  }
+  .architecture-benefits p {
+    min-height: 0;
   }
   .section-heading {
     display: block;
