@@ -1,0 +1,6 @@
+.deps/
+__pycache__/
+*.pyc
+.edge-qa*/
+.chrome-qa*/
+*-qa.png
