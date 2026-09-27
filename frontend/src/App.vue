@@ -5,7 +5,26 @@ import ArchitectureDiagram from "./ArchitectureDiagram.vue";
 
 const repo = "https://github.com/CantorAI/xlang3";
 const oldRepo = "https://github.com/xlang-foundation/xlang";
-const menuOpen = ref(false);
+const tabs = [
+  { path: "/", name: "Home", short: "Home", number: "01" },
+  { path: "/architecture", name: "Architecture", short: "Arch", number: "02" },
+  { path: "/try", name: "Try XLang3", short: "Try", number: "03" },
+  { path: "/benchmarks", name: "Benchmarks", short: "Bench", number: "04" },
+  { path: "/project", name: "Project", short: "Project", number: "05" },
+];
+const legacySections = {
+  "#architecture": "/architecture",
+  "#playground": "/try",
+  "#benchmarks": "/benchmarks",
+  "#progress": "/project#progress",
+  "#history": "/project#history",
+};
+if (window.location.pathname === "/" && legacySections[window.location.hash]) {
+  window.location.replace(legacySections[window.location.hash]);
+}
+const page =
+  tabs.find((tab) => tab.path === window.location.pathname) || tabs[0];
+document.title = `${page.name} — XLang Foundation`;
 const caseIndex = ref(0);
 const selected = computed(() => benchmark.cases[caseIndex.value]);
 const maxTime = computed(() =>
@@ -116,32 +135,37 @@ const progress = [
     >
   </div>
   <header class="topbar wrap">
-    <a class="brand" href="#top" aria-label="XLang Foundation home"
+    <a class="brand" href="/" aria-label="XLang Foundation home"
       ><span class="brand-mark">X<span>⌁</span></span
       ><span class="brand-words">XLANG<br /><small>FOUNDATION</small></span></a
-    ><button
-      class="menu-toggle"
-      type="button"
-      :aria-expanded="menuOpen"
-      aria-controls="main-nav"
-      @click="menuOpen = !menuOpen"
     >
-      Menu {{ menuOpen ? "−" : "+" }}
-    </button>
-    <nav id="main-nav" :class="{ open: menuOpen }" aria-label="Main navigation">
-      <a href="#why" @click="menuOpen = false">Why XLang3</a
-      ><a href="#architecture" @click="menuOpen = false">Architecture</a
-      ><a href="#playground" @click="menuOpen = false">Try it</a
-      ><a href="#benchmarks" @click="menuOpen = false">Benchmarks</a
-      ><a href="#progress" @click="menuOpen = false">Progress</a
-      ><a href="#history" @click="menuOpen = false">History</a>
+    <nav class="desktop-tabs" aria-label="Main pages">
+      <a
+        v-for="tab in tabs"
+        :key="tab.path"
+        :href="tab.path"
+        :class="{ active: page.path === tab.path }"
+        :aria-current="page.path === tab.path ? 'page' : undefined"
+        >{{ tab.name }}</a
+      >
     </nav>
     <a class="top-github" :href="repo" target="_blank" rel="noopener"
       >View source ↗</a
     >
   </header>
+  <nav class="mobile-tabs" aria-label="Main pages">
+    <a
+      v-for="tab in tabs"
+      :key="tab.path"
+      :href="tab.path"
+      :class="{ active: page.path === tab.path }"
+      :aria-current="page.path === tab.path ? 'page' : undefined"
+      ><span>{{ tab.number }}</span
+      >{{ tab.short }}</a
+    >
+  </nav>
   <main id="top">
-    <section class="hero wrap">
+    <section v-if="page.path === '/'" class="hero wrap">
       <div class="hero-copy">
         <div class="eyebrow">
           <span></span> AN OPEN-SOURCE LANGUAGE PROJECT, REDESIGNED
@@ -161,7 +185,7 @@ const progress = [
             target="_blank"
             rel="noopener"
             >Explore XLang3 on GitHub <span>↗</span></a
-          ><a class="button button-link" href="#playground"
+          ><a class="button button-link" href="/try"
             >Try XLang3 <span>↓</span></a
           >
         </div>
@@ -189,7 +213,7 @@ const progress = [
         </div>
       </div>
     </section>
-    <section class="statement" id="why">
+    <section v-if="page.path === '/'" class="statement" id="why">
       <div class="wrap statement-grid">
         <div class="section-kicker">01 / THE IDEA</div>
         <div>
@@ -213,7 +237,7 @@ const progress = [
         </div>
       </div>
     </section>
-    <section class="pillars wrap">
+    <section v-if="page.path === '/'" class="pillars wrap">
       <article>
         <div class="pillar-index">01 <span>↗</span></div>
         <h3>Familiar Python</h3>
@@ -245,7 +269,7 @@ const progress = [
         <span class="pill">DESIGN DIRECTION</span>
       </article>
     </section>
-    <section class="philosophy wrap" id="philosophy">
+    <section v-if="page.path === '/'" class="philosophy wrap" id="philosophy">
       <div class="section-kicker">THE XLANG3 PHILOSOPHY</div>
       <div class="philosophy-grid">
         <h2>
@@ -287,7 +311,11 @@ const progress = [
         </div>
       </div>
     </section>
-    <section class="architecture" id="architecture">
+    <section
+      v-if="page.path === '/architecture'"
+      class="architecture"
+      id="architecture"
+    >
       <div class="wrap">
         <div class="architecture-intro">
           <div>
@@ -312,7 +340,7 @@ const progress = [
               fast paths. It works without LLVM; current measured
               microbenchmarks remain slower than CPython.
             </p>
-            <a class="text-link light-link" href="#benchmarks"
+            <a class="text-link light-link" href="/benchmarks"
               >See the measured results ↗</a
             >
           </div>
@@ -384,7 +412,11 @@ const progress = [
         </div>
       </div>
     </section>
-    <section class="playground-section wrap" id="playground">
+    <section
+      v-if="page.path === '/try'"
+      class="playground-section wrap"
+      id="playground"
+    >
       <div class="section-heading">
         <div>
           <div class="section-kicker">03 / EXPERIENCE THE RUNTIME</div>
@@ -451,7 +483,11 @@ const progress = [
         backend exposes it only when that host is configured.
       </p>
     </section>
-    <section class="benchmark-section" id="benchmarks">
+    <section
+      v-if="page.path === '/benchmarks'"
+      class="benchmark-section"
+      id="benchmarks"
+    >
       <div class="wrap">
         <div class="section-heading">
           <div>
@@ -555,7 +591,11 @@ const progress = [
         </p>
       </div>
     </section>
-    <section class="progress-section" id="progress">
+    <section
+      v-if="page.path === '/project'"
+      class="progress-section"
+      id="progress"
+    >
       <div class="wrap">
         <div class="section-heading">
           <div>
@@ -593,7 +633,11 @@ const progress = [
         </div>
       </div>
     </section>
-    <section class="history-section wrap" id="history">
+    <section
+      v-if="page.path === '/project'"
+      class="history-section wrap"
+      id="history"
+    >
       <div class="history-intro">
         <div class="section-kicker">06 / HOW WE GOT HERE</div>
         <h2>From XLang<br /><span>to XLang3.</span></h2>
@@ -640,7 +684,7 @@ const progress = [
         </article>
       </div>
     </section>
-    <section class="agent-band">
+    <section v-if="page.path === '/project'" class="agent-band">
       <div class="wrap agent-grid">
         <div>
           <div class="section-kicker light">
@@ -665,7 +709,7 @@ const progress = [
         </div>
       </div>
     </section>
-    <section class="join wrap">
+    <section v-if="page.path === '/project'" class="join wrap">
       <div>
         <div class="section-kicker">07 / BUILD WITH US</div>
         <h2>Open source means<br /><span>open questions, too.</span></h2>
@@ -690,7 +734,7 @@ const progress = [
   </main>
   <footer>
     <div class="wrap footer-inner">
-      <a class="brand" href="#top"
+      <a class="brand" href="/"
         ><span class="brand-mark">X<span>⌁</span></span
         ><span class="brand-words"
           >XLANG<br /><small>FOUNDATION</small></span

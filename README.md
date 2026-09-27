@@ -1,6 +1,6 @@
 # XLang Foundation website
 
-The site uses a Vue 3/Vite frontend and a FastAPI backend **executed by XLang3**. The backend serves the built frontend, publishes benchmark data, and can launch a separate XLang3 process for each playground run.
+The site uses a Vue 3/Vite frontend and a FastAPI backend **executed by XLang3**. The backend serves the built frontend, publishes benchmark data, and can launch a separate XLang3 process for each playground run. The five directly linkable pages are `/`, `/architecture`, `/try`, `/benchmarks`, and `/project`. Desktop navigation uses top tabs; mobile navigation uses a fixed bottom tab bar.
 
 ## Local setup on Windows
 
@@ -21,7 +21,7 @@ Open <http://127.0.0.1:9088>. Check <http://127.0.0.1:9088/api/health>: `impleme
 
 Set `XLANG3_PLAYGROUND_ENABLED=1` before starting the server to enable playground runs on a **trusted local machine only**. Each request launches `$env:XLANG3_BIN` as a separate process with a three-second timeout. That process still has the host's filesystem and network access. For a public playground, put it on a separate host with OS/container isolation, resource limits, network restrictions, and request rate limits before enabling the flag. The main site runs without the playground.
 
-The repository's old Azure Static Web Apps workflow deployed only static frontend files and has been replaced with frontend build CI. As checked on September 26, 2026, the live `xlangfoundation.org` domain is instead served as static files by nginx on an Azure Ubuntu VM. Its nginx configuration has no `/api` proxy or XLang3 site service; the SPA fallback returns `index.html` for unknown paths, including `/api/health`. Production deployment of this redesign needs an XLang3 runtime service bound to localhost, an nginx proxy for `/api` and `/data`, and a deployment process for the built frontend. No production deployment is configured in this repository yet.
+The repository's old Azure Static Web Apps workflow deployed only static frontend files and has been replaced with frontend build CI. As checked on September 26, 2026, the live `xlangfoundation.org` domain is instead served as static files by nginx on an Azure Ubuntu VM. Its nginx configuration has no `/api` proxy or XLang3 site service; the SPA fallback returns `index.html` for unknown paths, including `/api/health`. Production deployment of this redesign needs an XLang3 runtime service bound to localhost, an nginx proxy for `/api` and `/data`, and a deployment process for the built frontend. Nginx must also serve `index.html` on direct requests to each page path above, while reserving `/api` and `/data` for the backend. No production deployment is configured in this repository yet.
 
 ## Benchmark evidence
 

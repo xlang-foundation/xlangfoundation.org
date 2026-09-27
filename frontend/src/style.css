@@ -112,14 +112,27 @@ p {
   font-size: 8px;
   letter-spacing: 0.15em;
 }
-.topbar nav {
+.desktop-tabs {
   display: flex;
-  gap: 27px;
+  align-items: stretch;
+  align-self: stretch;
+  gap: 3px;
   margin: auto;
   font-size: 12px;
   font-weight: 700;
 }
-.topbar nav a:hover,
+.desktop-tabs a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 13px;
+  border-bottom: 2px solid transparent;
+  color: #b7c7c8;
+}
+.desktop-tabs a.active {
+  color: #c5ee9a;
+  border-bottom-color: #bde88f;
+}
+.desktop-tabs a:hover,
 .text-link:hover,
 .join-links a:hover {
   color: #bde88f;
@@ -130,7 +143,7 @@ p {
   padding: 11px 14px;
   border: 1px solid #3c5361;
 }
-.menu-toggle {
+.mobile-tabs {
   display: none;
 }
 .hero {
@@ -925,8 +938,8 @@ footer {
   .topbar {
     gap: 20px;
   }
-  .topbar nav {
-    gap: 12px;
+  .desktop-tabs a {
+    padding: 0 8px;
   }
   .hero {
     grid-template-columns: 1fr;
@@ -954,6 +967,9 @@ footer {
   }
 }
 @media (max-width: 700px) {
+  body {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
   .announcement {
     padding: 9px 15px;
     text-align: center;
@@ -962,28 +978,48 @@ footer {
   .topbar {
     height: 70px;
   }
-  .topbar nav {
+  .desktop-tabs {
     display: none;
-    position: absolute;
-    z-index: 5;
-    top: 108px;
+  }
+  .mobile-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    position: fixed;
+    z-index: 20;
     left: 0;
     right: 0;
+    bottom: 0;
+    min-height: calc(68px + env(safe-area-inset-bottom));
+    padding: 0 4px env(safe-area-inset-bottom);
     background: #142739;
-    padding: 20px;
-    box-shadow: 0 15px 25px #0002;
+    border-top: 1px solid #3c5361;
+    box-shadow: 0 -12px 30px #0004;
   }
-  .topbar nav.open {
-    display: grid;
-    gap: 18px;
-  }
-  .menu-toggle {
-    display: block;
-    margin-left: auto;
-    background: transparent;
-    border: 0;
-    color: #edf3ee;
+  .mobile-tabs a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
+    color: #b9c9ca;
+    font-size: 10px;
     font-weight: 700;
+    border-top: 2px solid transparent;
+  }
+  .mobile-tabs a span {
+    color: #84a5a3;
+    font:
+      10px "DM Mono",
+      monospace;
+  }
+  .mobile-tabs a.active {
+    color: #c5ee9a;
+    border-top-color: #bde88f;
+    background: #1c3540;
+  }
+  .mobile-tabs a.active span {
+    color: #c5ee9a;
   }
   .top-github {
     display: none;

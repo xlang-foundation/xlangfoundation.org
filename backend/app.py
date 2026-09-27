@@ -67,6 +67,10 @@ async def benchmark_data():
 
 
 @app.get("/", include_in_schema=False)
+@app.get("/architecture", include_in_schema=False)
+@app.get("/try", include_in_schema=False)
+@app.get("/benchmarks", include_in_schema=False)
+@app.get("/project", include_in_schema=False)
 async def index():
     return FileResponse(DIST / "index.html")
 
