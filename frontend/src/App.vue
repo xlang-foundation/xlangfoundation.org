@@ -27,12 +27,22 @@ const page = computed(
   () => tabs.find((tab) => tab.path === pagePath.value) || tabs[0],
 );
 const architecturePanel = ref("diagram");
-const projectPanel = ref(
-  window.location.hash === "#history" ? "history" : "progress",
-);
+const projectPanels = ["progress", "history", "workflow", "contribute"];
+const projectPanelFromHash = () =>
+  projectPanels.includes(window.location.hash.slice(1))
+    ? window.location.hash.slice(1)
+    : "progress";
+const projectPanel = ref(projectPanelFromHash());
 function selectPanel(group, value) {
   if (group === "architecture") architecturePanel.value = value;
-  if (group === "project") projectPanel.value = value;
+  if (group === "project") {
+    projectPanel.value = value;
+    window.history.replaceState(
+      {},
+      "",
+      value === "progress" ? "/project" : `/project#${value}`,
+    );
+  }
   nextTick(() => window.scrollTo(0, 0));
 }
 watch(
@@ -54,14 +64,23 @@ function navigate(event, path) {
     return;
   }
   event.preventDefault();
-  if (window.location.pathname !== path) {
+  const target = new URL(path, window.location.origin);
+  if (
+    window.location.pathname !== target.pathname ||
+    window.location.hash !== target.hash
+  ) {
     window.history.pushState({}, "", path);
-    pagePath.value = path;
+    pagePath.value = target.pathname;
+    if (target.pathname === "/project") {
+      projectPanel.value = projectPanelFromHash();
+    }
   }
   nextTick(() => window.scrollTo(0, 0));
 }
 function onPopState() {
   pagePath.value = window.location.pathname;
+  if (pagePath.value === "/project")
+    projectPanel.value = projectPanelFromHash();
 }
 window.addEventListener("popstate", onPopState);
 onUnmounted(() => window.removeEventListener("popstate", onPopState));
@@ -180,10 +199,10 @@ const currentProgress = computed(() => progress[progressIndex.value]);
     <a
       class="brand"
       href="/"
-      aria-label="XLang Foundation home"
+      aria-label="XLang3 Foundation home"
       @click="navigate($event, '/')"
-      ><span class="brand-mark">X<span>⌁</span></span
-      ><span class="brand-words">XLANG<br /><small>FOUNDATION</small></span></a
+      ><span class="brand-mark" aria-hidden="true">X<sup>3</sup></span
+      ><span class="brand-words">lang<br /><small>FOUNDATION</small></span></a
     >
     <nav class="desktop-tabs" aria-label="Main pages">
       <a
@@ -219,12 +238,13 @@ const currentProgress = computed(() => progress[progressIndex.value]);
           <span></span> PYTHON-COMPATIBLE RUNTIME · OPEN DEVELOPMENT
         </div>
         <h1>
-          Python syntax.<br /><em>A new runtime.</em><br />Built for speed.
+          Familiar Python.<br /><em>A runtime built<br />for speed.</em>
         </h1>
+        <p class="hero-focus">Managed I/O designed for AI agents.</p>
         <p>
-          Write familiar Python. XLang3 runs it on an independent runtime with
-          an IR interpreter today and an LLVM executor planned. Follow the
-          compatibility work and real performance measurements in public.
+          XLang3 targets Python 3.14 syntax and runs ProgramIR through its own
+          interpreter today. A capability sandbox for files, network, and tools
+          is in design; LLVM compilation and performance work are ahead.
         </p>
         <div class="hero-actions">
           <a
@@ -243,17 +263,21 @@ const currentProgress = computed(() => progress[progressIndex.value]);
         <div class="hero-foot">
           <span><b>Python 3.14</b> syntax target</span
           ><span><b>IR interpreter</b> available now</span
-          ><span><b>LLVM executor</b> planned</span>
+          ><a
+            href="/project#workflow"
+            @click="navigate($event, '/project#workflow')"
+            ><b>Agent-authored</b> implementation ↗</a
+          >
         </div>
       </div>
       <div class="hero-visual" aria-label="XLang3 architecture illustration">
         <div class="visual-head">
-          <span>XLANG3 / RUNTIME MAP</span><span>001—003</span>
+          <span>X³lang / RUNTIME MAP</span><span>001—003</span>
         </div>
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
         <div class="visual-center">
-          <div class="visual-x">X<span>3</span></div>
+          <div class="visual-x">X<sup>3</sup></div>
           <div class="visual-sub">DESIGNED FOR<br />WHAT'S NEXT</div>
         </div>
         <div class="visual-node node-a">PYTHON SOURCE <span>↘</span></div>
@@ -836,10 +860,10 @@ const currentProgress = computed(() => progress[progressIndex.value]);
         </div>
         <div>
           <p>
-            XLang3 follows an agentic coding workflow: people set goals and
-            review evidence; coding agents generate the implementation, with no
-            manually written implementation lines. Source, tests, and work
-            history are public so contributors can inspect the result.
+            XLang3 is built through agentic coding. People set goals and review
+            designs, tests, and results; coding agents write the implementation
+            code. No implementation lines are written manually. Source, tests,
+            and work history are public so contributors can inspect the result.
           </p>
           <a
             class="button button-outline"
@@ -879,11 +903,13 @@ const currentProgress = computed(() => progress[progressIndex.value]);
   </main>
   <footer>
     <div class="wrap footer-inner">
-      <a class="brand" href="/" @click="navigate($event, '/')"
-        ><span class="brand-mark">X<span>⌁</span></span
-        ><span class="brand-words"
-          >XLANG<br /><small>FOUNDATION</small></span
-        ></a
+      <a
+        class="brand"
+        href="/"
+        aria-label="XLang3 Foundation home"
+        @click="navigate($event, '/')"
+        ><span class="brand-mark" aria-hidden="true">X<sup>3</sup></span
+        ><span class="brand-words">lang<br /><small>FOUNDATION</small></span></a
       >
       <p>
         This site uses Vue for its interface and FastAPI for its backend.<br />FastAPI
