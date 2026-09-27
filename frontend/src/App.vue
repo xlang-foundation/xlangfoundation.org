@@ -26,13 +26,11 @@ const pagePath = ref(window.location.pathname);
 const page = computed(
   () => tabs.find((tab) => tab.path === pagePath.value) || tabs[0],
 );
-const homePanel = ref("overview");
 const architecturePanel = ref("diagram");
 const projectPanel = ref(
   window.location.hash === "#history" ? "history" : "progress",
 );
 function selectPanel(group, value) {
-  if (group === "home") homePanel.value = value;
   if (group === "architecture") architecturePanel.value = value;
   if (group === "project") projectPanel.value = value;
   nextTick(() => window.scrollTo(0, 0));
@@ -215,51 +213,18 @@ const currentProgress = computed(() => progress[progressIndex.value]);
     >
   </nav>
   <main id="top">
-    <nav
-      v-if="page.path === '/'"
-      class="in-page-tabs wrap home-page-tabs"
-      aria-label="Home sections"
-    >
-      <button
-        type="button"
-        :class="{ active: homePanel === 'overview' }"
-        :aria-current="homePanel === 'overview' ? 'true' : undefined"
-        @click="selectPanel('home', 'overview')"
-      >
-        Overview
-      </button>
-      <button
-        type="button"
-        :class="{ active: homePanel === 'idea' }"
-        :aria-current="homePanel === 'idea' ? 'true' : undefined"
-        @click="selectPanel('home', 'idea')"
-      >
-        Why XLang3
-      </button>
-      <button
-        type="button"
-        :class="{ active: homePanel === 'philosophy' }"
-        :aria-current="homePanel === 'philosophy' ? 'true' : undefined"
-        @click="selectPanel('home', 'philosophy')"
-      >
-        Philosophy
-      </button>
-    </nav>
-    <section
-      v-if="page.path === '/' && homePanel === 'overview'"
-      class="hero wrap"
-    >
+    <section v-if="page.path === '/'" class="hero wrap">
       <div class="hero-copy">
         <div class="eyebrow">
-          <span></span> AN OPEN-SOURCE LANGUAGE PROJECT, REDESIGNED
+          <span></span> PYTHON-COMPATIBLE RUNTIME · OPEN DEVELOPMENT
         </div>
         <h1>
           Python syntax.<br /><em>A new runtime.</em><br />Built for speed.
         </h1>
         <p>
-          XLang3 is a fresh runtime for familiar Python code, shaped for the
-          next generation of AI applications. We publish the architecture,
-          unfinished work, and numbers along the way.
+          Write familiar Python. XLang3 runs it on an independent runtime with
+          an IR interpreter today and an LLVM executor planned. Follow the
+          compatibility work and real performance measurements in public.
         </p>
         <div class="hero-actions">
           <a
@@ -276,9 +241,9 @@ const currentProgress = computed(() => progress[progressIndex.value]);
           >
         </div>
         <div class="hero-foot">
-          <span><b>Python 3.14</b> compatibility target</span
-          ><span><b>Apache 2.0</b> runtime license</span
-          ><span><b>Public</b> development</span>
+          <span><b>Python 3.14</b> syntax target</span
+          ><span><b>IR interpreter</b> available now</span
+          ><span><b>LLVM executor</b> planned</span>
         </div>
       </div>
       <div class="hero-visual" aria-label="XLang3 architecture illustration">
@@ -299,11 +264,7 @@ const currentProgress = computed(() => progress[progressIndex.value]);
         </div>
       </div>
     </section>
-    <section
-      v-if="page.path === '/' && homePanel === 'idea'"
-      class="statement"
-      id="why"
-    >
+    <section v-if="page.path === '/'" class="statement" id="why">
       <div class="wrap statement-grid">
         <div class="section-kicker">01 / THE IDEA</div>
         <div>
@@ -327,10 +288,7 @@ const currentProgress = computed(() => progress[progressIndex.value]);
         </div>
       </div>
     </section>
-    <section
-      v-if="page.path === '/' && homePanel === 'idea'"
-      class="pillars wrap"
-    >
+    <section v-if="page.path === '/'" class="pillars wrap">
       <article>
         <div class="pillar-index">01 <span>↗</span></div>
         <h3>Familiar Python</h3>
@@ -362,11 +320,7 @@ const currentProgress = computed(() => progress[progressIndex.value]);
         <span class="pill">DESIGN DIRECTION</span>
       </article>
     </section>
-    <section
-      v-if="page.path === '/' && homePanel === 'philosophy'"
-      class="philosophy wrap"
-      id="philosophy"
-    >
+    <section v-if="page.path === '/'" class="philosophy wrap" id="philosophy">
       <div class="section-kicker">THE XLANG3 PHILOSOPHY</div>
       <div class="philosophy-grid">
         <h2>

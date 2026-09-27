@@ -188,13 +188,13 @@ p {
 .hero {
   display: grid;
   grid-template-columns: 1.04fr 0.96fr;
-  min-height: 632px;
-  padding-top: 37px;
-  padding-bottom: 84px;
+  min-height: 0;
+  padding-top: 18px;
+  padding-bottom: 54px;
   gap: 42px;
 }
 .hero-copy {
-  padding: 51px 0 0;
+  padding: 24px 0 0;
 }
 .eyebrow,
 .section-kicker,
@@ -216,7 +216,7 @@ p {
   background: #b5d99a;
 }
 .hero h1 {
-  font-size: clamp(57px, 5.7vw, 86px);
+  font-size: clamp(57px, 5.7vw, 78px);
   line-height: 1.035;
   letter-spacing: -0.075em;
   margin: 27px 0 23px;
@@ -234,7 +234,7 @@ p {
   display: flex;
   align-items: center;
   gap: 25px;
-  margin-top: 33px;
+  margin-top: 25px;
 }
 .button {
   display: inline-flex;
@@ -260,7 +260,7 @@ p {
   gap: 18px;
   flex-wrap: wrap;
   border-top: 1px solid #344a58;
-  margin-top: 52px;
+  margin-top: 28px;
   padding-top: 17px;
   color: #a6b5bb;
   font-size: 10px;
@@ -271,7 +271,7 @@ p {
 .hero-visual {
   position: relative;
   overflow: hidden;
-  min-height: 520px;
+  min-height: 440px;
   background: #16263a;
   color: white;
   border-radius: 2px;
