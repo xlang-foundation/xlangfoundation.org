@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, nextTick, onUnmounted, ref, watch } from "vue";
 import benchmark from "../data/benchmark.json";
 import ArchitectureDiagram from "./ArchitectureDiagram.vue";
 
@@ -22,9 +22,40 @@ const legacySections = {
 if (window.location.pathname === "/" && legacySections[window.location.hash]) {
   window.location.replace(legacySections[window.location.hash]);
 }
-const page =
-  tabs.find((tab) => tab.path === window.location.pathname) || tabs[0];
-document.title = `${page.name} — XLang Foundation`;
+const pagePath = ref(window.location.pathname);
+const page = computed(
+  () => tabs.find((tab) => tab.path === pagePath.value) || tabs[0],
+);
+watch(
+  page,
+  (current) => {
+    document.title = `${current.name} — XLang Foundation`;
+  },
+  { immediate: true },
+);
+function navigate(event, path) {
+  if (
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return;
+  }
+  event.preventDefault();
+  if (window.location.pathname !== path) {
+    window.history.pushState({}, "", path);
+    pagePath.value = path;
+  }
+  nextTick(() => window.scrollTo(0, 0));
+}
+function onPopState() {
+  pagePath.value = window.location.pathname;
+}
+window.addEventListener("popstate", onPopState);
+onUnmounted(() => window.removeEventListener("popstate", onPopState));
 const caseIndex = ref(0);
 const selected = computed(() => benchmark.cases[caseIndex.value]);
 const maxTime = computed(() =>
@@ -135,7 +166,11 @@ const progress = [
     >
   </div>
   <header class="topbar wrap">
-    <a class="brand" href="/" aria-label="XLang Foundation home"
+    <a
+      class="brand"
+      href="/"
+      aria-label="XLang Foundation home"
+      @click="navigate($event, '/')"
       ><span class="brand-mark">X<span>⌁</span></span
       ><span class="brand-words">XLANG<br /><small>FOUNDATION</small></span></a
     >
@@ -146,6 +181,7 @@ const progress = [
         :href="tab.path"
         :class="{ active: page.path === tab.path }"
         :aria-current="page.path === tab.path ? 'page' : undefined"
+        @click="navigate($event, tab.path)"
         >{{ tab.name }}</a
       >
     </nav>
@@ -160,6 +196,7 @@ const progress = [
       :href="tab.path"
       :class="{ active: page.path === tab.path }"
       :aria-current="page.path === tab.path ? 'page' : undefined"
+      @click="navigate($event, tab.path)"
       ><span>{{ tab.number }}</span
       >{{ tab.short }}</a
     >
@@ -185,7 +222,10 @@ const progress = [
             target="_blank"
             rel="noopener"
             >Explore XLang3 on GitHub <span>↗</span></a
-          ><a class="button button-link" href="/try"
+          ><a
+            class="button button-link"
+            href="/try"
+            @click="navigate($event, '/try')"
             >Try XLang3 <span>↓</span></a
           >
         </div>
@@ -340,7 +380,10 @@ const progress = [
               fast paths. It works without LLVM; current measured
               microbenchmarks remain slower than CPython.
             </p>
-            <a class="text-link light-link" href="/benchmarks"
+            <a
+              class="text-link light-link"
+              href="/benchmarks"
+              @click="navigate($event, '/benchmarks')"
               >See the measured results ↗</a
             >
           </div>
@@ -734,7 +777,7 @@ const progress = [
   </main>
   <footer>
     <div class="wrap footer-inner">
-      <a class="brand" href="/"
+      <a class="brand" href="/" @click="navigate($event, '/')"
         ><span class="brand-mark">X<span>⌁</span></span
         ><span class="brand-words"
           >XLANG<br /><small>FOUNDATION</small></span
