@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 :root {
   font-family: "DM Sans", sans-serif;
-  color: #142033;
-  background: #f5f4ef;
+  color: #edf3ee;
+  background: #0d1826;
   font-synthesis: none;
 }
 * {
@@ -47,7 +47,7 @@ h2 {
   letter-spacing: -0.055em;
 }
 h2 span {
-  color: #78818b;
+  color: #a9e28a;
 }
 p {
   line-height: 1.65;
@@ -122,13 +122,13 @@ p {
 .topbar nav a:hover,
 .text-link:hover,
 .join-links a:hover {
-  color: #597b3f;
+  color: #bde88f;
 }
 .top-github {
   font-size: 12px;
   font-weight: 700;
   padding: 11px 14px;
-  border: 1px solid #c8cdc9;
+  border: 1px solid #3c5361;
 }
 .menu-toggle {
   display: none;
@@ -151,7 +151,7 @@ p {
     500 10px "DM Mono",
     monospace;
   letter-spacing: 0.17em;
-  color: #4e7161;
+  color: #b5d99a;
 }
 .eyebrow {
   display: flex;
@@ -161,7 +161,7 @@ p {
 .eyebrow span {
   height: 1px;
   width: 27px;
-  background: #4e7161;
+  background: #b5d99a;
 }
 .hero h1 {
   font-size: clamp(57px, 5.7vw, 86px);
@@ -171,12 +171,12 @@ p {
 }
 .hero h1 em {
   font-style: normal;
-  color: #68955f;
+  color: #bde88f;
 }
 .hero-copy > p {
   max-width: 560px;
   font-size: 17px;
-  color: #586474;
+  color: #b2c2c7;
 }
 .hero-actions {
   display: flex;
@@ -194,11 +194,11 @@ p {
   font-weight: 700;
 }
 .button-dark {
-  background: #17273a;
-  color: #fff;
+  background: #bde88f;
+  color: #142333;
 }
 .button-dark:hover {
-  background: #304863;
+  background: #d4f3af;
 }
 .button-link {
   padding-left: 0;
@@ -207,14 +207,14 @@ p {
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
-  border-top: 1px solid #d4d9d3;
+  border-top: 1px solid #344a58;
   margin-top: 52px;
   padding-top: 17px;
-  color: #7c8589;
+  color: #a6b5bb;
   font-size: 10px;
 }
 .hero-foot b {
-  color: #263644;
+  color: #edf3ee;
 }
 .hero-visual {
   position: relative;
@@ -304,16 +304,16 @@ p {
 .visual-node {
   position: absolute;
   z-index: 2;
-  background: #f2f5e9;
-  color: #283949;
-  border: 1px solid #b7c8b7;
+  background: #203d43;
+  color: #e6f1e8;
+  border: 1px solid #79a78b;
   padding: 11px 13px;
   font: 9px "DM Mono";
   letter-spacing: 0.07em;
   box-shadow: 0 10px 30px #0003;
 }
 .visual-node span {
-  color: #669653;
+  color: #bde88f;
   margin-left: 9px;
 }
 .node-a {
@@ -329,7 +329,7 @@ p {
   bottom: 18%;
 }
 .statement {
-  background: #e8ece4;
+  background: #132537;
   padding: 105px 0;
 }
 .statement-grid {
@@ -343,7 +343,7 @@ p {
 .statement p {
   font-size: 17px;
   max-width: 730px;
-  color: #52615f;
+  color: #b2c2c7;
 }
 .text-link {
   font-size: 12px;
@@ -360,7 +360,7 @@ p {
   padding-bottom: 92px;
 }
 .pillars article {
-  border-left: 1px solid #cdd4ce;
+  border-left: 1px solid #344a58;
   padding: 0 35px 0 28px;
   min-height: 275px;
 }
@@ -370,7 +370,7 @@ p {
 }
 .pillar-index {
   font: 11px "DM Mono";
-  color: #709061;
+  color: #bde88f;
   display: flex;
   justify-content: space-between;
 }
@@ -384,18 +384,18 @@ p {
 }
 .pillars p {
   font-size: 13px;
-  color: #66716e;
+  color: #aebfc1;
   min-height: 91px;
 }
 .pill {
   font: 9px "DM Mono";
   letter-spacing: 0.08em;
-  background: #e4ebde;
-  color: #52724b;
+  background: #244439;
+  color: #c8efa8;
   padding: 8px 9px;
 }
 .architecture {
-  background: #17273a;
+  background: #101f2e;
   color: #f5f7f0;
   padding: 104px 0 112px;
 }
@@ -521,7 +521,7 @@ p {
 .section-heading p {
   max-width: 730px;
   font-size: 16px;
-  color: #66716e;
+  color: #b2c2c7;
   margin: 0;
 }
 .section-heading .text-link {
@@ -530,18 +530,18 @@ p {
 .status-pill {
   font: 10px "DM Mono";
   padding: 9px 13px;
-  background: #e6e8df;
-  color: #66716e;
+  background: #243748;
+  color: #bdc9c9;
   white-space: nowrap;
 }
 .status-pill.ready {
-  background: #dcebd0;
-  color: #3b6d30;
+  background: #244439;
+  color: #c8efa8;
 }
 .playground-card {
   background: #17273a;
   color: #e5eced;
-  box-shadow: 12px 12px 0 #d7ded5;
+  box-shadow: 12px 12px 0 #263b4c;
 }
 .playground-toolbar {
   height: 51px;
@@ -641,33 +641,33 @@ p {
 .playground-caption,
 .benchmark-caveat {
   font-size: 12px;
-  color: #77837e;
+  color: #aebfc1;
   margin: 20px 0 0;
 }
 .benchmark-section {
-  background: #e8ece4;
+  background: #132537;
 }
 .benchmark-card {
-  background: #f7f7f2;
-  border: 1px solid #ced6cd;
+  background: #1c3042;
+  border: 1px solid #446171;
 }
 .benchmark-tabs {
   display: flex;
   flex-wrap: wrap;
-  border-bottom: 1px solid #ced6cd;
+  border-bottom: 1px solid #446171;
 }
 .benchmark-tabs button {
   background: none;
   border: 0;
-  border-right: 1px solid #ced6cd;
+  border-right: 1px solid #446171;
   padding: 15px 20px;
-  color: #62706e;
+  color: #bac9c9;
   text-transform: capitalize;
   font-size: 11px;
 }
 .benchmark-tabs button.active {
-  background: #17273a;
-  color: #c7ef9e;
+  background: #bde88f;
+  color: #142333;
 }
 .benchmark-body {
   padding: 38px 42px 35px;
@@ -701,37 +701,37 @@ p {
 }
 .bar-track {
   height: 23px;
-  background: #e5e8e0;
+  background: #304657;
 }
 .bar {
   height: 100%;
   transition: width 0.35s ease;
 }
 .bar-python {
-  background: #788b91;
+  background: #96b0bb;
 }
 .bar-xlang {
-  background: #8dbd65;
+  background: #bde88f;
 }
 .benchmark-note {
-  border-top: 1px solid #d8ddd6;
+  border-top: 1px solid #446171;
   margin-top: 35px;
   padding-top: 19px;
   font-size: 12px;
-  color: #65716d;
+  color: #b8c9c9;
 }
 .benchmark-note b {
   font: 700 23px "Space Grotesk";
-  color: #17273a;
+  color: #bde88f;
   margin-right: 8px;
 }
 .benchmark-note span {
   float: right;
 }
 .benchmark-meta {
-  background: #e0e7dc;
+  background: #223b4b;
   padding: 20px 42px;
-  color: #52645c;
+  color: #c4d3cf;
   font: 10px/1.8 "DM Mono";
   display: flex;
   gap: 12px;
@@ -744,7 +744,7 @@ p {
   text-decoration: underline;
 }
 .progress-list {
-  border-top: 1px solid #cdd4ce;
+  border-top: 1px solid #344a58;
 }
 .progress-item {
   display: grid;
@@ -752,14 +752,14 @@ p {
   gap: 24px;
   align-items: start;
   padding: 27px 6px;
-  border-bottom: 1px solid #cdd4ce;
+  border-bottom: 1px solid #344a58;
 }
 .progress-item:hover {
-  background: #ebefe7;
+  background: #192d3d;
 }
 .progress-number {
   font: 11px "DM Mono";
-  color: #729569;
+  color: #bde88f;
 }
 .progress-item h3 {
   font-size: 20px;
@@ -767,13 +767,13 @@ p {
 }
 .progress-item p {
   font-size: 12px;
-  color: #66716e;
+  color: #aebfc1;
   max-width: 650px;
   margin: 0;
 }
 .progress-state {
   font: 10px "DM Mono";
-  color: #597e4a;
+  color: #bde88f;
   text-transform: uppercase;
   padding-top: 4px;
 }
@@ -784,17 +784,17 @@ p {
   display: grid;
   grid-template-columns: 31% 1fr;
   gap: 9%;
-  border-top: 1px solid #ccd3cc;
+  border-top: 1px solid #344a58;
 }
 .history-intro h2 {
   margin: 24px 0;
 }
 .history-intro p {
   font-size: 15px;
-  color: #65716c;
+  color: #aebfc1;
 }
 .history-line {
-  border-left: 1px solid #bdcbbf;
+  border-left: 1px solid #496579;
   margin-left: 6px;
 }
 .history-line article {
@@ -810,15 +810,15 @@ p {
   top: 2px;
   width: 11px;
   height: 11px;
-  background: #8fbb72;
-  border: 3px solid #f5f4ef;
+  background: #bde88f;
+  border: 3px solid #0d1826;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px #8fbb72;
+  box-shadow: 0 0 0 1px #bde88f;
 }
 .history-line small {
   font: 10px "DM Mono";
   letter-spacing: 0.1em;
-  color: #709061;
+  color: #bde88f;
 }
 .history-line h3 {
   font-size: 27px;
@@ -826,7 +826,7 @@ p {
 }
 .history-line p {
   font-size: 13px;
-  color: #64716d;
+  color: #aebfc1;
   max-width: 550px;
   margin-bottom: 10px;
 }
@@ -836,8 +836,8 @@ p {
   text-decoration: underline;
 }
 .agent-band {
-  background: #779f65;
-  color: #10251c;
+  background: #1b3a37;
+  color: #edf3ee;
   padding: 75px 0;
 }
 .agent-grid {
@@ -847,7 +847,7 @@ p {
   align-items: center;
 }
 .agent-band .section-kicker {
-  color: #284d30;
+  color: #bde88f;
 }
 .agent-band h2 {
   font-size: clamp(43px, 5vw, 72px);
@@ -858,7 +858,7 @@ p {
   max-width: 490px;
 }
 .button-outline {
-  border: 1px solid #23462e;
+  border: 1px solid #89bc83;
   margin-top: 10px;
 }
 .join {
@@ -871,10 +871,10 @@ p {
 }
 .join p {
   max-width: 470px;
-  color: #63706b;
+  color: #aebfc1;
 }
 .join-links {
-  border-top: 1px solid #c7d0c6;
+  border-top: 1px solid #344a58;
   align-self: center;
 }
 .join-links a {
@@ -882,19 +882,19 @@ p {
   align-items: center;
   gap: 22px;
   padding: 22px 6px;
-  border-bottom: 1px solid #c7d0c6;
+  border-bottom: 1px solid #344a58;
   font-size: 16px;
   font-weight: 700;
 }
 .join-links span {
   font: 11px "DM Mono";
-  color: #7d9f6c;
+  color: #bde88f;
 }
 .join-links b {
   margin-left: auto;
 }
 footer {
-  background: #142033;
+  background: #09111c;
   color: #dce4e1;
   padding: 37px 0;
 }
@@ -969,7 +969,7 @@ footer {
     top: 108px;
     left: 0;
     right: 0;
-    background: #f5f4ef;
+    background: #142739;
     padding: 20px;
     box-shadow: 0 15px 25px #0002;
   }
@@ -982,6 +982,7 @@ footer {
     margin-left: auto;
     background: transparent;
     border: 0;
+    color: #edf3ee;
     font-weight: 700;
   }
   .top-github {
@@ -1043,7 +1044,7 @@ footer {
   .pillars article,
   .pillars article:first-child {
     border: 0;
-    border-bottom: 1px solid #cdd4ce;
+    border-bottom: 1px solid #344a58;
     padding: 25px 0;
     min-height: 0;
   }
@@ -1089,7 +1090,7 @@ footer {
   }
   .benchmark-tabs button {
     flex: 1 1 50%;
-    border-bottom: 1px solid #ced6cd;
+    border-bottom: 1px solid #446171;
   }
   .benchmark-body {
     padding: 28px 20px;
@@ -1133,7 +1134,7 @@ footer {
 .philosophy {
   padding-top: 15px;
   padding-bottom: 105px;
-  border-top: 1px solid #cdd4ce;
+  border-top: 1px solid #344a58;
 }
 .philosophy > .section-kicker {
   padding-top: 30px;
@@ -1149,7 +1150,7 @@ footer {
 }
 .philosophy p {
   font-size: 16px;
-  color: #56635f;
+  color: #b2c2c7;
 }
 .philosophy ul {
   list-style: none;
@@ -1157,17 +1158,17 @@ footer {
   margin: 23px 0;
 }
 .philosophy li {
-  border-top: 1px solid #d3dad1;
+  border-top: 1px solid #344a58;
   padding: 13px 0;
   font-size: 13px;
   line-height: 1.5;
-  color: #66716e;
+  color: #aebfc1;
 }
 .philosophy li b {
-  color: #21342b;
+  color: #edf3ee;
 }
 .philosophy li:last-child {
-  border-bottom: 1px solid #d3dad1;
+  border-bottom: 1px solid #344a58;
 }
 @media (max-width: 700px) {
   .philosophy {
