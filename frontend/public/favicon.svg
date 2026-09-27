@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">X cubed lang</title>
+  <rect width="64" height="64" rx="6" fill="#17273a"/>
+  <path d="M10 21h11l11 13 10-13h10L38 38l15 16H41l-9-10-9 10H11l15-17z" fill="#bde88f"/>
+  <text x="44" y="20" fill="#bde88f" font-family="Arial,sans-serif" font-size="17" font-weight="700">3</text>
+</svg>

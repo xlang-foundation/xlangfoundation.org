@@ -1,0 +1,20 @@
+{
+  "name": "xlang-foundation-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "format:check": "prettier --check src index.html vite.config.js package.json"
+  },
+  "dependencies": {
+    "vue": "^3.5.18"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.1",
+    "prettier": "^3.9.9",
+    "vite": "^7.1.3"
+  }
+}
