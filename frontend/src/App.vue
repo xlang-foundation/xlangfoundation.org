@@ -254,7 +254,7 @@ const currentProgress = computed(() => progress[progressIndex.value]);
           <span></span> AN OPEN-SOURCE LANGUAGE PROJECT, REDESIGNED
         </div>
         <h1>
-          Python syntax.<br /><em>A new runtime.</em><br />Built in the open.
+          Python syntax.<br /><em>A new runtime.</em><br />Built for speed.
         </h1>
         <p>
           XLang3 is a fresh runtime for familiar Python code, shaped for the
