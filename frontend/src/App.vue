@@ -886,8 +886,8 @@ const currentProgress = computed(() => progress[progressIndex.value]);
         ></a
       >
       <p>
-        Vue frontend · FastAPI served by XLang3.<br />Open source, measured, and
-        in progress.
+        This site uses Vue for its interface and FastAPI for its backend.<br />FastAPI
+        runs on the XLang3 runtime.
       </p>
       <div>
         <a :href="repo" target="_blank" rel="noopener">GitHub ↗</a
