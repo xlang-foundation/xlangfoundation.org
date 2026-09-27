@@ -26,6 +26,17 @@ const pagePath = ref(window.location.pathname);
 const page = computed(
   () => tabs.find((tab) => tab.path === pagePath.value) || tabs[0],
 );
+const homePanel = ref("overview");
+const architecturePanel = ref("diagram");
+const projectPanel = ref(
+  window.location.hash === "#history" ? "history" : "progress",
+);
+function selectPanel(group, value) {
+  if (group === "home") homePanel.value = value;
+  if (group === "architecture") architecturePanel.value = value;
+  if (group === "project") projectPanel.value = value;
+  nextTick(() => window.scrollTo(0, 0));
+}
 watch(
   page,
   (current) => {
@@ -155,6 +166,8 @@ const progress = [
     "https://github.com/xlang-foundation/xlangfoundation.org/blob/main/docs/managed-io-sandbox.md",
   ],
 ];
+const progressIndex = ref(0);
+const currentProgress = computed(() => progress[progressIndex.value]);
 </script>
 
 <template>
@@ -202,7 +215,40 @@ const progress = [
     >
   </nav>
   <main id="top">
-    <section v-if="page.path === '/'" class="hero wrap">
+    <nav
+      v-if="page.path === '/'"
+      class="in-page-tabs wrap home-page-tabs"
+      aria-label="Home sections"
+    >
+      <button
+        type="button"
+        :class="{ active: homePanel === 'overview' }"
+        :aria-current="homePanel === 'overview' ? 'true' : undefined"
+        @click="selectPanel('home', 'overview')"
+      >
+        Overview
+      </button>
+      <button
+        type="button"
+        :class="{ active: homePanel === 'idea' }"
+        :aria-current="homePanel === 'idea' ? 'true' : undefined"
+        @click="selectPanel('home', 'idea')"
+      >
+        Why XLang3
+      </button>
+      <button
+        type="button"
+        :class="{ active: homePanel === 'philosophy' }"
+        :aria-current="homePanel === 'philosophy' ? 'true' : undefined"
+        @click="selectPanel('home', 'philosophy')"
+      >
+        Philosophy
+      </button>
+    </nav>
+    <section
+      v-if="page.path === '/' && homePanel === 'overview'"
+      class="hero wrap"
+    >
       <div class="hero-copy">
         <div class="eyebrow">
           <span></span> AN OPEN-SOURCE LANGUAGE PROJECT, REDESIGNED
@@ -253,7 +299,11 @@ const progress = [
         </div>
       </div>
     </section>
-    <section v-if="page.path === '/'" class="statement" id="why">
+    <section
+      v-if="page.path === '/' && homePanel === 'idea'"
+      class="statement"
+      id="why"
+    >
       <div class="wrap statement-grid">
         <div class="section-kicker">01 / THE IDEA</div>
         <div>
@@ -277,7 +327,10 @@ const progress = [
         </div>
       </div>
     </section>
-    <section v-if="page.path === '/'" class="pillars wrap">
+    <section
+      v-if="page.path === '/' && homePanel === 'idea'"
+      class="pillars wrap"
+    >
       <article>
         <div class="pillar-index">01 <span>↗</span></div>
         <h3>Familiar Python</h3>
@@ -309,7 +362,11 @@ const progress = [
         <span class="pill">DESIGN DIRECTION</span>
       </article>
     </section>
-    <section v-if="page.path === '/'" class="philosophy wrap" id="philosophy">
+    <section
+      v-if="page.path === '/' && homePanel === 'philosophy'"
+      class="philosophy wrap"
+      id="philosophy"
+    >
       <div class="section-kicker">THE XLANG3 PHILOSOPHY</div>
       <div class="philosophy-grid">
         <h2>
@@ -369,9 +426,44 @@ const progress = [
             runtime.
           </p>
         </div>
-        <ArchitectureDiagram />
-        <p class="diagram-hint">Scroll horizontally to explore the diagram.</p>
-        <div class="architecture-benefits">
+        <nav class="in-page-tabs" aria-label="Architecture sections">
+          <button
+            type="button"
+            :class="{ active: architecturePanel === 'diagram' }"
+            :aria-current="architecturePanel === 'diagram' ? 'true' : undefined"
+            @click="selectPanel('architecture', 'diagram')"
+          >
+            Runtime map
+          </button>
+          <button
+            type="button"
+            :class="{ active: architecturePanel === 'executors' }"
+            :aria-current="
+              architecturePanel === 'executors' ? 'true' : undefined
+            "
+            @click="selectPanel('architecture', 'executors')"
+          >
+            Executors
+          </button>
+          <button
+            type="button"
+            :class="{ active: architecturePanel === 'io' }"
+            :aria-current="architecturePanel === 'io' ? 'true' : undefined"
+            @click="selectPanel('architecture', 'io')"
+          >
+            Managed I/O
+          </button>
+        </nav>
+        <div v-if="architecturePanel === 'diagram'" class="in-page-panel">
+          <ArchitectureDiagram />
+          <p class="diagram-hint">
+            Scroll horizontally to explore the diagram.
+          </p>
+        </div>
+        <div
+          v-if="architecturePanel === 'executors'"
+          class="architecture-benefits in-page-panel"
+        >
           <div>
             <span>01 / NO COMPILER REQUIRED</span>
             <h3>Interpreter executor.</h3>
@@ -419,7 +511,10 @@ const progress = [
             >
           </div>
         </div>
-        <div class="managed-io-panel">
+        <div
+          v-if="architecturePanel === 'io'"
+          class="managed-io-panel in-page-panel"
+        >
           <div>
             <span>PROPOSED / MANAGED I/O SANDBOX</span>
             <h3>Every effect crosses a boundary.</h3>
@@ -634,8 +729,46 @@ const progress = [
         </p>
       </div>
     </section>
-    <section
+    <nav
       v-if="page.path === '/project'"
+      class="in-page-tabs wrap project-page-tabs"
+      aria-label="Project sections"
+    >
+      <button
+        type="button"
+        :class="{ active: projectPanel === 'progress' }"
+        :aria-current="projectPanel === 'progress' ? 'true' : undefined"
+        @click="selectPanel('project', 'progress')"
+      >
+        Progress
+      </button>
+      <button
+        type="button"
+        :class="{ active: projectPanel === 'history' }"
+        :aria-current="projectPanel === 'history' ? 'true' : undefined"
+        @click="selectPanel('project', 'history')"
+      >
+        History
+      </button>
+      <button
+        type="button"
+        :class="{ active: projectPanel === 'workflow' }"
+        :aria-current="projectPanel === 'workflow' ? 'true' : undefined"
+        @click="selectPanel('project', 'workflow')"
+      >
+        How we build
+      </button>
+      <button
+        type="button"
+        :class="{ active: projectPanel === 'contribute' }"
+        :aria-current="projectPanel === 'contribute' ? 'true' : undefined"
+        @click="selectPanel('project', 'contribute')"
+      >
+        Contribute
+      </button>
+    </nav>
+    <section
+      v-if="page.path === '/project' && projectPanel === 'progress'"
       class="progress-section"
       id="progress"
     >
@@ -657,27 +790,36 @@ const progress = [
             >Browse the work log ↗</a
           >
         </div>
-        <div class="progress-list">
-          <a
-            v-for="item in progress"
-            :key="item[0]"
-            class="progress-item"
-            :href="item[4]"
-            target="_blank"
-            rel="noopener"
-            ><span class="progress-number">{{ item[0] }}</span>
-            <div>
-              <h3>{{ item[1] }}</h3>
-              <p>{{ item[3] }}</p>
-            </div>
-            <span class="progress-state">{{ item[2] }}</span
-            ><span class="progress-arrow">↗</span></a
-          >
+        <div class="progress-browser">
+          <div class="progress-picker" aria-label="Project milestones">
+            <button
+              v-for="(item, index) in progress"
+              :key="item[0]"
+              type="button"
+              :class="{ active: progressIndex === index }"
+              :aria-current="progressIndex === index ? 'true' : undefined"
+              @click="progressIndex = index"
+            >
+              <span>{{ item[0] }}</span
+              >{{ item[1] }}
+            </button>
+          </div>
+          <article class="progress-detail">
+            <span class="progress-number"
+              >MILESTONE {{ currentProgress[0] }} / 05</span
+            >
+            <h3>{{ currentProgress[1] }}</h3>
+            <span class="progress-state">{{ currentProgress[2] }}</span>
+            <p>{{ currentProgress[3] }}</p>
+            <a :href="currentProgress[4]" target="_blank" rel="noopener"
+              >Read the evidence ↗</a
+            >
+          </article>
         </div>
       </div>
     </section>
     <section
-      v-if="page.path === '/project'"
+      v-if="page.path === '/project' && projectPanel === 'history'"
       class="history-section wrap"
       id="history"
     >
@@ -727,7 +869,10 @@ const progress = [
         </article>
       </div>
     </section>
-    <section v-if="page.path === '/project'" class="agent-band">
+    <section
+      v-if="page.path === '/project' && projectPanel === 'workflow'"
+      class="agent-band"
+    >
       <div class="wrap agent-grid">
         <div>
           <div class="section-kicker light">
@@ -752,7 +897,10 @@ const progress = [
         </div>
       </div>
     </section>
-    <section v-if="page.path === '/project'" class="join wrap">
+    <section
+      v-if="page.path === '/project' && projectPanel === 'contribute'"
+      class="join wrap"
+    >
       <div>
         <div class="section-kicker">07 / BUILD WITH US</div>
         <h2>Open source means<br /><span>open questions, too.</span></h2>

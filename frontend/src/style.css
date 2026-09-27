@@ -147,6 +147,44 @@ p {
 .mobile-tabs {
   display: none;
 }
+.in-page-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #0d1826;
+  scrollbar-width: thin;
+}
+.in-page-tabs button {
+  flex: 0 0 auto;
+  border: 1px solid #3e5967;
+  border-radius: 0;
+  background: #172b3b;
+  color: #bacace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 11px 18px;
+}
+.in-page-tabs button:hover,
+.in-page-tabs button:focus-visible {
+  border-color: #bde88f;
+  color: #edf3ee;
+}
+.in-page-tabs button.active {
+  background: #bde88f;
+  border-color: #bde88f;
+  color: #142333;
+}
+.architecture .in-page-tabs {
+  background: #101f2e;
+}
+.project-page-tabs {
+  margin-top: 26px;
+}
 .hero {
   display: grid;
   grid-template-columns: 1.04fr 0.96fr;
@@ -344,7 +382,7 @@ p {
 }
 .statement {
   background: #132537;
-  padding: 105px 0;
+  padding: 48px 0;
 }
 .statement-grid {
   display: grid;
@@ -370,7 +408,7 @@ p {
 .pillars {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding-top: 88px;
+  padding-top: 42px;
   padding-bottom: 92px;
 }
 .pillars article {
@@ -411,20 +449,20 @@ p {
 .architecture {
   background: #101f2e;
   color: #f5f7f0;
-  padding: 104px 0 112px;
+  padding: 46px 0 70px;
 }
 .architecture-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 9%;
   align-items: end;
-  margin-bottom: 35px;
+  margin-bottom: 24px;
 }
 .section-kicker.light {
   color: #b8dc91;
 }
 .architecture h2 {
-  margin: 31px 0 0;
+  margin: 16px 0 0;
 }
 .architecture h2 span {
   color: #a9e28a;
@@ -451,7 +489,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 29px;
-  margin-top: 54px;
+  margin-top: 22px;
 }
 .architecture-benefits > div {
   border-top: 1px solid #536c70;
@@ -478,7 +516,7 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8%;
-  margin-top: 55px;
+  margin-top: 22px;
   padding: 31px 35px;
   border: 1px solid #597380;
   background: #233c4e;
@@ -519,8 +557,8 @@ p {
 .progress-section,
 .history-section,
 .join {
-  padding-top: 105px;
-  padding-bottom: 110px;
+  padding-top: 42px;
+  padding-bottom: 70px;
 }
 .section-heading {
   display: flex;
@@ -530,7 +568,7 @@ p {
   margin-bottom: 34px;
 }
 .section-heading h2 {
-  margin: 22px 0 12px;
+  margin: 12px 0 10px;
 }
 .section-heading p {
   max-width: 730px;
@@ -757,42 +795,73 @@ p {
 .benchmark-caveat a {
   text-decoration: underline;
 }
-.progress-list {
-  border-top: 1px solid #344a58;
-}
-.progress-item {
+.progress-browser {
   display: grid;
-  grid-template-columns: 60px minmax(0, 1fr) 180px 20px;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.2fr);
   gap: 24px;
-  align-items: start;
-  padding: 27px 6px;
-  border-bottom: 1px solid #344a58;
 }
-.progress-item:hover {
-  background: #192d3d;
+.progress-picker {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+}
+.progress-picker button {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  text-align: left;
+  padding: 15px 16px;
+  background: #172a3a;
+  color: #c7d5d3;
+  border: 1px solid #344a58;
+  font-size: 13px;
+  font-weight: 700;
+}
+.progress-picker button span {
+  color: #bde88f;
+  font: 11px "DM Mono";
+}
+.progress-picker button.active {
+  background: #29493c;
+  border-color: #bde88f;
+  color: #f4f8f1;
+}
+.progress-picker button:focus-visible {
+  outline: 2px solid #bde88f;
+  outline-offset: 2px;
+}
+.progress-detail {
+  background: #172a3a;
+  border: 1px solid #344a58;
+  padding: 32px;
+  min-height: 322px;
 }
 .progress-number {
   font: 11px "DM Mono";
   color: #bde88f;
 }
-.progress-item h3 {
-  font-size: 20px;
-  margin: 0 0 7px;
+.progress-detail h3 {
+  font-size: clamp(24px, 3vw, 36px);
+  margin: 18px 0 12px;
 }
-.progress-item p {
-  font-size: 12px;
+.progress-detail p {
+  font-size: 15px;
   color: #aebfc1;
   max-width: 650px;
-  margin: 0;
+  margin: 25px 0 30px;
 }
 .progress-state {
   font: 10px "DM Mono";
   color: #bde88f;
   text-transform: uppercase;
-  padding-top: 4px;
 }
-.progress-arrow {
-  font-size: 19px;
+.progress-detail a {
+  display: inline-block;
+  color: #bde88f;
+  font-size: 12px;
+  font-weight: 700;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
 }
 .history-section {
   display: grid;
@@ -1027,16 +1096,17 @@ footer {
   }
   .hero {
     padding-top: 5px;
-    padding-bottom: 65px;
+    padding-bottom: 30px;
+    min-height: 0;
   }
   .hero-copy {
-    padding-top: 30px;
+    padding-top: 18px;
   }
   .hero h1 {
     font-size: clamp(49px, 12vw, 75px);
   }
   .hero-visual {
-    min-height: 380px;
+    display: none;
   }
   .orbit-one {
     width: 250px;
@@ -1062,8 +1132,8 @@ footer {
   .progress-section,
   .history-section,
   .join {
-    padding-top: 70px;
-    padding-bottom: 75px;
+    padding-top: 28px;
+    padding-bottom: 45px;
   }
   .pillars,
   .architecture-intro,
@@ -1075,8 +1145,8 @@ footer {
     grid-template-columns: 1fr;
   }
   .pillars {
-    padding-top: 40px;
-    padding-bottom: 60px;
+    padding-top: 20px;
+    padding-bottom: 35px;
   }
   .pillars article,
   .pillars article:first-child {
@@ -1135,19 +1205,31 @@ footer {
   .benchmark-meta {
     padding: 16px 20px;
   }
-  .progress-item {
-    grid-template-columns: 30px 1fr 20px;
-    gap: 12px;
+  .progress-browser {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
-  .progress-state {
-    grid-column: 2;
+  .progress-picker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .progress-arrow {
-    grid-column: 3;
-    grid-row: 1;
+  .progress-picker button {
+    min-height: 58px;
+    padding: 9px;
+    gap: 9px;
+    font-size: 11px;
+  }
+  .progress-detail {
+    min-height: 0;
+    padding: 23px;
   }
   .history-line {
-    margin-top: 20px;
+    margin-top: 4px;
+  }
+  .history-section {
+    gap: 18px;
+  }
+  .history-line article {
+    padding-bottom: 28px;
   }
   .agent-grid {
     gap: 15px;
@@ -1158,6 +1240,32 @@ footer {
   }
   .hero-foot {
     margin-top: 33px;
+  }
+  .in-page-tabs {
+    gap: 6px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .in-page-tabs button {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+  .architecture-intro h2,
+  .section-heading h2 {
+    font-size: clamp(34px, 8vw, 46px);
+  }
+  .architecture-intro p,
+  .section-heading p {
+    font-size: 14px;
+  }
+  .architecture-benefits {
+    margin-top: 12px;
+  }
+  .managed-io-panel {
+    margin-top: 12px;
+  }
+  .agent-band {
+    padding: 35px 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1170,7 +1278,7 @@ footer {
 }
 .philosophy {
   padding-top: 15px;
-  padding-bottom: 105px;
+  padding-bottom: 55px;
   border-top: 1px solid #344a58;
 }
 .philosophy > .section-kicker {
