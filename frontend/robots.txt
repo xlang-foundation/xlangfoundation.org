@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xlangfoundation.org/sitemap.xml
